@@ -1,13 +1,13 @@
 # CD-2026-Proyecto-EquipoEMCR
 TALLER 01
 
-Cristobal Rojas
+Cristóbal Rojas
 Emanuel Herrera 
 
 --
 
-Del problema al proyecto analítico
-Problemática 1 - Predicción de demanda energética
+# Predicción de demanda energética - Cristóbal Rojas
+
 Contexto: En Chile, la transición hacia una matriz energética basada en energías renovables variables (solar en el norte y eólica en el centro-sur) ha generado un desafío crítico de estabilidad en el Sistema Eléctrico Nacional (SEN).
 En este escenario realista, la Zona Central y la Región de Valparaíso enfrentan picos severos de demanda durante las horas punta nocturnas (18:00 a 23:00 hrs), justo cuando la generación solar cae a cero. Aunque existen centrales hidroeléctricas de pasada y parques de baterías BESS (System Battery Energy Storage), estos tienen capacidades de almacenamiento limitadas y tiempos de rampa de despacho ajustados.
 Si la demanda real supera la oferta programada por el Coordinador Eléctrico Nacional, se deben encender de emergencia centrales térmicas de respaldo (altamente costosas y contaminantes) o aplicar cortes no programados por desprendimiento de carga para evitar el colapso de las subestaciones.
@@ -31,6 +31,41 @@ Variables Predictoras: Alerta de ola de frío (variable categórica: Sí/No). Ti
 # ¿Cuánta energía (en MWh) deberán entregar los sistemas de almacenamiento de baterías (BESS) durante la rampa de caída solar (18:30 a 20:00 hrs) para compensar la pérdida de generación fotovoltaica sin encender centrales térmicas?
 Variable Objetivo: Energía total requerida de descarga BESS (continua, en MWh).
 Variables Predictoras: Tasa de caída de la generación solar (MW/minuto) en el norte chico y zona central. Velocidad de viento proyectada en parques eólicos de la Región de Coquimbo y Valparaíso. Tasa de incremento de demanda residencial (MW/minuto).
+
+## 🔄 Metodología CRISP-DM: Predicción de Demanda Eléctrica (SEN Chile)
+
+### 1. Business Understanding
+* **Objetivo de Negocio:** Reducir un 15% el uso de generación térmica de respaldo en horas punta y evitar cortes por sobrecarga en el Sistema Eléctrico Nacional (SEN).
+* **Meta Técnica:** Predecir la demanda energética horaria con un $MAPE < 1.5\%$.
+* **Criterio de Éxito:** Reducción de costos marginales mediante el despacho óptimo de renovables y sistemas BESS.
+
+### 2. Data Understanding
+* **Fuentes de Datos:** API del Coordinador Eléctrico Nacional (telemetría y generación), Dirección Meteorológica de Chile (DMC) y registros de distribuidoras.
+* **Exploración:** Análisis de estacionalidad (invierno/verano), comportamiento de la curva pato (*Duck Curve*) y correlación entre temperatura y picos de consumo.
+
+### 3. Data Preparation
+* **Limpieza e Imputación:** Filtrado de anomalías en medidores de campo e interpolación de telemetría faltante.
+* **Ingeniería de Variables (*Feature Engineering*):**
+  * Variables de retardo (*lags* a $t-1$, $t-24$, $t-168$ hrs).
+  * Transformación cíclica ($\sin/\cos$) para hora del día y día del año.
+  * Cálculo de Grados Día de Calefacción (HDD).
+* **Alineación:** Integración y resampleo de series temporales a una frecuencia uniforme de 15 minutos.
+
+### 4. Modeling
+* **Algoritmos:** LightGBM, XGBoost (por eficiencia y manejo de relaciones no lineales) y redes LSTM/TFT para patrones temporales complejos.
+* **Estrategia de Validación:** *Time Series Split* (ventana expansiva) para evitar la fuga de información (*data leakage*).
+* **Ajuste:** Optimización de hiperparámetros penalizando errores extremos en picos de consumo.
+
+### 5. Evaluation
+* **Métricas:** Evaluación con RMSE, MAE y MAPE sobre conjuntos de prueba cronológicos.
+* **Simulación Financiera:** Estimación del ahorro operativo ($MWh$ térmicos sustituidos por BESS/renovables).
+* **Pruebas de Estrés:** Simulación ante frentes de frío repentinos y fallas de transmisión.
+
+### 6. Deployment
+* **Integración:** Despliegue mediante API REST conectada al centro de control del Coordinador Eléctrico Nacional.
+* **Monitoreo:** Detección en tiempo real de *Concept Drift* (cambios en patrones de consumo) y métricas de error operativo.
+* **Mantenimiento:** Pipeline automatizado de reentrenamiento semanal con datos de telemetría recientes.
+
 
 # Esperas Hospitalarias - Emanuel Herrera
 
