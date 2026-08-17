@@ -3,7 +3,8 @@
 
 **Integrantes:**
 * Cristóbal Rojas
-* Emanuel Herrera 
+* Emanuel Herrera
+* Nicholas Espinoza
 
 ---
 
