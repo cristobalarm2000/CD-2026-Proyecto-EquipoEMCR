@@ -2,5 +2,20 @@
 __pycache__/
 *.pyc
 .env
+.venv/
+
+# Datos: no se versionan (se regeneran con src/descargar_pjud.py)
 *.csv
 *.xlsx
+*.xls
+*.zip
+*.parquet
+data/raw/**
+data/processed/**
+!data/**/.gitkeep
+!data/**/README.md
+
+# Salidas generadas
+reports/**
+!reports/.gitkeep
+*.html

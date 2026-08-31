@@ -1,106 +1,121 @@
-# CD-2026-Proyecto-EquipoEMCR
-**TALLER 01**
+# Predicción de demanda en Tribunales de Familia — Región de Valparaíso
+
+**CD 2026 · Equipo EMCR**
 
 **Integrantes:**
 * Cristóbal Rojas
 * Emanuel Herrera
 * Nicholas Espinoza
 
----
-
-# Proyecto 1: Predicción de demanda energética - Cristóbal Rojas
-
-## Comprender el problema
-
-**Contexto:** 
-En Chile, la transición hacia una matriz energética basada en energías renovables variables (solar en el norte y eólica en el centro-sur) ha generado un desafío crítico de estabilidad en el Sistema Eléctrico Nacional (SEN). En este escenario realista, la Zona Central y la Región de Valparaíso enfrentan picos severos de demanda durante las horas punta nocturnas (18:00 a 23:00 hrs), justo cuando la generación solar cae a cero. Aunque existen centrales hidroeléctricas de pasada y parques de baterías BESS (System Battery Energy Storage), estos tienen capacidades de almacenamiento limitadas y tiempos de rampa de despacho ajustados. Si la demanda real supera la oferta programada por el Coordinador Eléctrico Nacional, se deben encender de emergencia centrales térmicas de respaldo (altamente costosas y contaminantes) o aplicar cortes no programados por desprendimiento de carga para evitar el colapso de las subestaciones.
-
-**¿Cuál es el problema?**
-La alta volatilidad de la demanda en horas punta, combinada con la intermitencia renovable y el alto costo de la generación de respaldo en Chile. El desfase de la curva pato genera riesgos de saturación en la red y obliga a encender plantas térmicas lentas y contaminantes.
-
-**¿Quién toma decisiones?**
-* **Coordinador Eléctrico Nacional (CEN):** Opera el sistema y despacha la energía en tiempo real. 
-* **Generadoras y Distribuidoras:** Ajustan ofertas y distribución local. 
-* **Ministerio de Energía y CNE:** Definen normativas, regulación y metas de descarbonización.
-
-**¿Qué impacto tendría resolverlo?**
-Reducción del costo marginal, mayor aprovechamiento de energía limpia con menos emisiones y estabilidad en la red eléctrica.
+> El enunciado original del Taller 01 (propuestas individuales) quedó archivado en
+> [`README_TALLER01.md`](README_TALLER01.md).
 
 ---
 
-## Preguntas analíticas
+## 1. Problema
 
-### Pregunta Analítica 1: Enfoque de Regresión (Demanda Máxima)
-**Pregunta:** ¿Cuál será la demanda máxima de energía (en MW) en el subsistema Central del SEN entre las 18:00 y las 23:00 horas, considerando la temperatura ambiental proyectada, la humedad relativa y la tendencia de consumo de los últimos 7 días?
-*   **Variable Objetivo:** Demanda máxima de energía en horas punta (continua, en MW).
-*   **Variables Predictoras:** Temperatura mínima y máxima proyectada (°C), Humedad relativa (HL), Consumo registrado en el mismo bloque horario durante los 1, 7 y 14 días previos (MW).
-*   **Temporalidad:** Análisis retrospectivo de los últimos 14 días para predecir el comportamiento en la ventana horaria de 18:00 a 23:00 hrs del día en curso.
+Los Juzgados de Familia concentran una carga muy alta y volátil (pensión de
+alimentos, cuidado personal, relación directa y regular, violencia intrafamiliar,
+medidas de protección). Cuando los **ingresos** superan de forma sostenida la
+capacidad de **término**, crece el inventario de causas pendientes, se alargan las
+duraciones y se saturan las agendas de audiencias.
 
-### Pregunta Analítica 2: Enfoque de Clasificación (Sobrecarga)
-**Pregunta:** ¿Cuál es la probabilidad de que una subestación de distribución regional supere el 90% de su capacidad nominal durante un día hábil de invierno, en función del pronóstico del tiempo, el calendario escolar y laboral, y la tasa de electrificación de calefacción en la zona?
-*   **Variable Objetivo:** Estado de sobrecarga de la subestación (binaria: `1` = Mayor o igual a 90% / `0` = Bajo 90%).
-*   **Variables Predictoras:** Alerta de ola de frío (variable categórica: Sí/No), Tipo de día (día hábil, fin de semana, feriado), Consumo promedio por cliente residencial en las últimas 4 horas, Índice de radiación solar efectiva acumulada durante el día.
-*   **Temporalidad:** Predicción orientada a días hábiles de invierno, utilizando acumulados del día y métricas de las últimas 4 horas para inferir el riesgo de sobrecarga inminente.
+**¿Quién decide?** La Corporación Administrativa del Poder Judicial (dotación,
+creación de tribunales, salas), las Cortes de Apelaciones y los jueces
+presidentes de cada tribunal (gestión de agenda).
 
-### Pregunta Analítica 3: Enfoque de Regresión (BESS)
-**Pregunta:** ¿Cuánta energía (en MWh) deberán entregar los sistemas de almacenamiento de baterías (BESS) durante la rampa de caída solar (18:30 a 20:00 hrs) para compensar la pérdida de generación fotovoltaica sin encender centrales térmicas?
-*   **Variable Objetivo:** Energía total requerida de descarga BESS (continua, en MWh).
-*   **Variables Predictoras:** Tasa de caída de la generación solar (MW/minuto) en el norte chico y zona central, Velocidad de viento proyectada en parques eólicos de la Región de Coquimbo y Valparaíso, Tasa de incremento de demanda residencial (MW/minuto).
-*   **Temporalidad:** Horizonte de predicción ultra-específico durante el período de rampa (18:30 a 20:00 hrs), evaluando la tasa de cambio minuto a minuto.
+**¿Qué impacto tendría resolverlo?** Anticipar la demanda permite dimensionar
+dotación y agenda con semanas o meses de anticipación, reducir el atraso y
+acortar la duración de las causas.
 
----
+**Alcance:** materia **Familia**, **Corte de Apelaciones de Valparaíso
+(código 30)**, período base **2022–2024** (ampliable a 2015+).
 
-## Relacionar el proyecto con CRISP-DM
+## 2. Preguntas analíticas
 
-| Fase | ¿Cómo se aplicaría en su proyecto? |
-| :--- | :--- |
-| **Business Understanding** | Definir la meta de reducir un 15% el uso de generación térmica de respaldo en horas punta y evitar cortes por sobrecarga en el SEN. El éxito se basa en lograr predecir la demanda energética horaria con un MAPE < 1.5% para habilitar el despacho óptimo de renovables y sistemas BESS. |
-| **Data Understanding** | Extraer y explorar telemetría y generación desde la API del CEN, clima de la DMC y registros de distribuidoras. Analizar la estacionalidad (invierno/verano), el desfase de la curva pato y la correlación entre temperaturas extremas y consumo. |
-| **Data Preparation** | Realizar limpieza mediante el filtrado de anomalías e imputación de telemetría faltante. Construir variables temporales (lags, transformaciones senoidales para horas/días, Grados Día de Calefacción) y resamplear series a intervalos de 15 minutos. |
-| **Modeling** | Entrenar modelos aptos para relaciones no lineales (LightGBM, XGBoost) y temporales (redes LSTM/TFT). Utilizar validación expansiva (*Time Series Split*) para evitar filtración de datos y ajustar hiperparámetros enfocados en penalizar errores en los picos máximos. |
-| **Evaluation** | Validar el desempeño con métricas como RMSE, MAE y MAPE en conjuntos de prueba cronológicos. Simular el impacto financiero (ahorro en MWh térmicos) y ejecutar pruebas de estrés (ej. frentes de frío repentinos). |
-| **Deployment** | Implementar los modelos a través de una API REST integrada al centro de control del CEN. Monitorear derivas de concepto (*Concept Drift*) en tiempo real y establecer un pipeline de reentrenamiento continuo semanal. |
+### P1 — Regresión / series de tiempo (demanda)
+¿Cuántas causas de Familia **ingresarán** y cuántas **terminarán** por mes en cada
+juzgado de la V Región durante los próximos 3–12 meses, dada la estacionalidad,
+la tendencia y la carga reciente?
+* **Objetivo:** nº de ingresos / nº de términos mensuales (conteo).
+* **Predictores:** rezagos (1, 3, 12 meses), mes del año, inventario del mes
+  anterior, audiencias realizadas, tribunal, tipo de causa.
 
----
+### P2 — Análisis de supervivencia (duración)
+¿Cuánto tardará una causa en **terminar** desde su ingreso, y qué probabilidad
+tiene de seguir abierta a los N meses?
+* **Objetivo:** tiempo ingreso→término (evento), con censura para las causas aún
+  en tramitación.
+* **Predictores:** materia, tipo de causa, tribunal, forma de inicio, marca VIF,
+  nº de audiencias, carga del tribunal al ingresar.
 
-# Proyecto 2: Esperas Hospitalarias - Emanuel Herrera
+### P3 — Clasificación (riesgo de atraso)
+¿Qué causas tienen alta probabilidad de superar la duración objetivo (p. ej. 12
+meses) o de quedar sin término dentro del año de ingreso?
 
-## Comprender el problema
+## 3. Datos
 
-**¿Cuál es el problema?**
-La alta congestión y tiempos de espera impredecibles en el Servicio de Urgencias del hospital. Esto provoca la frustración de los pacientes, el abandono de los recintos sin recibir atención y una severa sobrecarga reactiva para el personal de salud.
+Todo proviene de datos abiertos del Poder Judicial (ver [`docs/API_PJUD.md`](docs/API_PJUD.md)):
 
-**¿Quién toma decisiones?**
-La dirección del hospital y la jefatura médica de Urgencias. Ellos son los responsables directos de gestionar los recursos clínicos, asignar al personal de turno y administrar la disponibilidad de camas.
+| Fuente | Uso |
+|---|---|
+| API agregada `/pjen/…` | series mensuales rápidas (ingresos, términos, duración, audiencias) por Corte 30 + Familia, 2015+ |
+| Descargas fila-a-fila (`numeros.pjud.cl`) | `Ingresos`, `Terminos`, `Inventario`, `Duracion`, `Audiencias` 2022–2024, nacional → se filtra `COD. CORTE = 30` |
 
-**¿Qué impacto tendría resolverlo?**
-Contar con estimaciones de espera permitiría gestionar transparentemente las expectativas del paciente. Además, habilitaría a los tomadores de decisiones para anticipar cuellos de botella y reasignar personal proactivamente, reduciendo el colapso, optimizando los escasos recursos y mejorando radicalmente la calidad y oportunidad de la atención clínica.
+**Los datos NO se versionan** (ver `.gitignore`). Se regeneran con los scripts:
 
----
+```bash
+python src/descargar_pjud.py   --competencia familia --anios 2022 2023 2024
+python src/descomprimir_zips.py --entrada data/raw/familia
+```
 
-## Preguntas analíticas
+## 4. Estructura del repo
 
-### Pregunta Analítica 1: Enfoque de Regresión
-**Pregunta:** ¿Qué factores operativos, temporales y demográficos determinan el tiempo exacto que un paciente deberá esperar en Urgencias antes de recibir su primera atención médica?
-*   **Variable objetivo:** Tiempo de espera total (medido en minutos continuos desde la finalización del triage hasta el primer contacto médico).
-*   **Variables predictoras posibles:** Nivel de urgencia asignado en el triage (C1 - C5), Cantidad total de pacientes que ya se encuentran en la sala de espera, Número de médicos especialistas y generales con turno activo, Edad del paciente, Hora de llegada y día de la semana.
-*   **Temporalidad:** Entrenamiento utilizando registros históricos continuos de los últimos 2 a 3 años. La predicción se realiza en **tiempo real** en el instante exacto en que el paciente finaliza su triage, con variables operativas actualizándose en ventanas de 15 a 30 minutos.
+```
+├── data/
+│   ├── raw/         # descargas y CSV crudos (ignorado)
+│   └── processed/   # panel mensual / parquet filtrado a V Región (ignorado)
+├── notebooks/       # EDA y modelado
+├── reports/         # dashboards y figuras generadas (ignorado)
+├── src/
+│   ├── pjud_api.py               # cliente de la API agregada
+│   ├── app.py                    # CLI: consultar / descargar / dashboard
+│   ├── descargar_pjud.py         # baja los ZIP -CSV por competencia y año
+│   ├── descomprimir_zips.py      # extrae los ZIP a CSV con nombres limpios
+│   └── cruce_ingresos_terminos.py# cruza ingresos vs términos por ID de causa
+├── docs/
+│   ├── API_PJUD.md               # referencia de ambas APIs
+│   └── usoapis.pdf               # documento oficial de códigos
+└── README_TALLER01.md            # enunciado original archivado
+```
 
-### Pregunta Analítica 2: Enfoque de Clasificación
-**Pregunta:** ¿Qué variables influyen en la probabilidad de que un paciente de urgencias supere el umbral crítico de tolerancia establecido por el hospital (por ejemplo, más de 120 minutos de espera)?
-*   **Variable objetivo:** Alerta de espera prolongada (Variable binaria: `1` si el paciente espera más de 120 minutos, `0` si espera 120 minutos o menos).
-*   **Variables predictoras posibles:** Tasa de ocupación actual de camas de hospitalización, Categoría de triage del paciente, Mes del año (para capturar la estacionalidad de enfermedades), Medio de llegada al hospital, Proporción de pacientes respecto al personal médico en el momento del ingreso.
-*   **Temporalidad:** Entrenamiento basado en ciclos anuales completos (mínimo 2 años) para capturar los picos estacionales de invierno y verano. El horizonte de inferencia es **inmediato al ingreso**, evaluando el riesgo de espera prolongada desde el momento en que el paciente cruza la puerta.
+## 5. Puesta en marcha
 
----
+```bash
+python -m venv .venv && .venv\Scripts\activate      # Windows
+pip install -r requirements.txt
+```
 
-## Relacionar el proyecto con CRISP-DM
+Ejemplos:
 
-| Fase | ¿Cómo se aplicaría en su proyecto? |
-| :--- | :--- |
-| **Business Understanding** | Comprender el problema de congestión en Urgencias del hospital, definiendo el objetivo de negocio: predecir los tiempos de espera para optimizar la asignación proactiva de recursos médicos y gestionar las expectativas de los pacientes. |
-| **Data Understanding** | Extraer y explorar los registros históricos del hospital (últimos 2-3 años). Analizar qué datos están disponibles (niveles de triage, horas de ingreso, personal de turno) y evaluar su calidad (identificar registros incompletos o inconsistentes). |
-| **Data Preparation** | Limpiar los datos manejando valores nulos y eliminando anomalías (outliers) en los tiempos registrados. Construir nuevas variables (feature engineering), como el cálculo de "pacientes en sala" o la categorización de "bloques horarios". |
-| **Modeling** | Seleccionar y entrenar algoritmos de Machine Learning (enfocados en regresión, como Random Forest o Regresión Lineal) utilizando los datos históricos preparados para predecir la variable objetivo: el tiempo de espera en minutos. |
-| **Evaluation** | Medir la precisión de las predicciones del modelo utilizando métricas de error (como MAE o RMSE). Validar con la dirección del hospital y la jefatura médica si el nivel de exactitud alcanzado cumple con los requerimientos operativos reales. |
-| **Deployment** | Integrar el modelo predictivo en los sistemas informáticos del hospital para que genere estimaciones en tiempo real. Desplegar un panel de control (dashboard) para la jefatura y conectar los tiempos estimados a las pantallas de la sala de espera. |
+```bash
+# Serie agregada de ingresos de Familia en Valparaíso
+python src/app.py consultar --endpoint ingresos_rol_competencia --competencia Familia --corte 30 --anio 2024
+
+# Cruce ingreso↔término por ID, solo V Región, 2022-2024
+python src/cruce_ingresos_terminos.py \
+  --ingresos data/raw/familia/Ingresos-2022-CSV.zip data/raw/familia/Ingresos-2023-CSV.zip data/raw/familia/Ingresos-2024-CSV.zip \
+  --terminos data/raw/familia/Terminos-2022-CSV.zip data/raw/familia/Terminos-2023-CSV.zip data/raw/familia/Terminos-2024-CSV.zip \
+  --filtro-corte 30 --salida reports/cruce_familia_valparaiso
+```
+
+## 6. CRISP-DM
+
+| Fase | En este proyecto |
+|---|---|
+| **Business Understanding** | Reducir el atraso en Familia (V Región): predecir ingresos/términos mensuales y la duración de las causas para dimensionar dotación y agenda. Métrica de éxito: MAPE < 15 % en la demanda mensual y c-index > 0,70 en el modelo de duración. |
+| **Data Understanding** | API agregada + bases fila-a-fila de PJUD. Explorar estacionalidad, tendencia, quiebres (pandemia 2020, tribunales nuevos), calidad (mojibake, claves `CRR CAUSA`, formatos de fecha, multiplicidad por materia). |
+| **Data Preparation** | Filtrar `COD. CORTE = 30`, deduplicar por ID, construir panel `tribunal × mes` (ingresos, términos, inventario, audiencias). Marcar censura para causas sin término. Guardar en `data/processed/` como Parquet. |
+| **Modeling** | Demanda: SARIMA / Prophet y gradient boosting (LightGBM) con rezagos, modelo global jerárquico por tribunal. Duración: análisis de supervivencia (Cox, AFT, Random Survival Forest). |
+| **Evaluation** | Validación temporal (*time series split*). Métricas: MAE/RMSE/MAPE (demanda), c-index / Brier (duración). Comparar tribunales y contra estándares (tasa de resolución ≈ 100 %). |
+| **Deployment** | Dashboard (`reports/`) con proyección de demanda e inventario y simulación de capacidad ("¿cuántas salas para bajar la duración mediana en 2 meses?"). Reentrenamiento periódico al publicarse cada nuevo año. |
