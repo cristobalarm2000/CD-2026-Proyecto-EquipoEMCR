@@ -6,116 +6,150 @@
 * Cristóbal Rojas
 * Emanuel Herrera
 * Nicholas Espinoza
+* Bastián Suárez
 
-> El enunciado original del Taller 01 (propuestas individuales) quedó archivado en
+> El enunciado original del Taller 01 quedó archivado en
 > [`README_TALLER01.md`](README_TALLER01.md).
 
 ---
 
-## 1. Problema
+## Objetivo
 
-Los Juzgados de Familia concentran una carga muy alta y volátil (pensión de
-alimentos, cuidado personal, relación directa y regular, violencia intrafamiliar,
-medidas de protección). Cuando los **ingresos** superan de forma sostenida la
-capacidad de **término**, crece el inventario de causas pendientes, se alargan las
-duraciones y se saturan las agendas de audiencias.
+Modelar la **demanda** de los Juzgados de Familia de la **Región de Valparaíso**
+(Corte de Apelaciones de Valparaíso, código **30**): cuántas causas ingresan y
+cuántas terminan por mes, cuánto tardan en terminar y cuántas quedan en
+tramitación. El insumo son los datos abiertos del Poder Judicial de Chile.
 
-**¿Quién decide?** La Corporación Administrativa del Poder Judicial (dotación,
-creación de tribunales, salas), las Cortes de Apelaciones y los jueces
-presidentes de cada tribunal (gestión de agenda).
+## Estado actual
 
-**¿Qué impacto tendría resolverlo?** Anticipar la demanda permite dimensionar
-dotación y agenda con semanas o meses de anticipación, reducir el atraso y
-acortar la duración de las causas.
+- [x] **Extracción de datos 2022–2024** (Ingresos, Términos, Inventario,
+      Duración y Audiencias de la materia Familia, a nivel nacional).
+- [ ] Construcción del panel `tribunal × mes` filtrado a la Corte 30.
+- [ ] EDA y modelos (demanda y duración).
 
-**Alcance:** materia **Familia**, **Corte de Apelaciones de Valparaíso
-(código 30)**, período base **2022–2024** (ampliable a 2015+).
+---
 
-## 2. Preguntas analíticas
+## 1. De dónde salen los datos
 
-### P1 — Regresión / series de tiempo (demanda)
-¿Cuántas causas de Familia **ingresarán** y cuántas **terminarán** por mes en cada
-juzgado de la V Región durante los próximos 3–12 meses, dada la estacionalidad,
-la tendencia y la carga reciente?
-* **Objetivo:** nº de ingresos / nº de términos mensuales (conteo).
-* **Predictores:** rezagos (1, 3, 12 meses), mes del año, inventario del mes
-  anterior, audiencias realizadas, tribunal, tipo de causa.
+Todo viene de `https://estadisticaservices.pjud.cl` (público, sin autenticación).
+Hay **dos APIs**. Referencia detallada en [`docs/API_PJUD.md`](docs/API_PJUD.md) y
+en el documento oficial [`docs/usoapis.pdf`](docs/usoapis.pdf).
 
-### P2 — Análisis de supervivencia (duración)
-¿Cuánto tardará una causa en **terminar** desde su ingreso, y qué probabilidad
-tiene de seguir abierta a los N meses?
-* **Objetivo:** tiempo ingreso→término (evento), con censura para las causas aún
-  en tramitación.
-* **Predictores:** materia, tipo de causa, tribunal, forma de inicio, marca VIF,
-  nº de audiencias, carga del tribunal al ingresar.
+### 1.1 API agregada — `/pjen/…`
 
-### P3 — Clasificación (riesgo de atraso)
-¿Qué causas tienen alta probabilidad de superar la duración objetivo (p. ej. 12
-meses) o de quedar sin término dentro del año de ingreso?
+Series ya totalizadas. Útil para las series mensuales rápidas.
 
-## 3. Datos
+```
+GET /pjen/<endpoint>/<corte>/<tribunal>/<competencia>/<anio>
+→ [ { "key": "<texto>", "value": <número> }, ... ]
+```
 
-Todo proviene de datos abiertos del Poder Judicial (ver [`docs/API_PJUD.md`](docs/API_PJUD.md)):
-
-| Fuente | Uso |
+| parámetro | valor para este proyecto |
 |---|---|
-| API agregada `/pjen/…` | series mensuales rápidas (ingresos, términos, duración, audiencias) por Corte 30 + Familia, 2015+ |
-| Descargas fila-a-fila (`numeros.pjud.cl`) | `Ingresos`, `Terminos`, `Inventario`, `Duracion`, `Audiencias` 2022–2024, nacional → se filtra `COD. CORTE = 30` |
+| `corte` | **30** (C.A. de Valparaíso); `0` = todo el país |
+| `tribunal` | `0` (todos) |
+| `competencia` | `Familia` |
+| `anio` | 2015 en adelante |
 
-**Los datos NO se versionan** (ver `.gitignore`). Se regeneran con los scripts:
+Endpoints usados: `ingresos_rol_competencia`, `ingresos_materia_competencia`,
+`terminos_rol_competencia`, `terminos_materia_competencia`,
+`causas_tramitacion_competencia`, `duracion_causas_competencia`,
+`audiencias_realizadas_competencia`, `duracion_audiencias_competencia`
+(cada uno con su variante `*_detalle` = desglose por tribunal).
+
+**Conexión:** `src/pjud_api.py` expone la clase `PJUDClient` (sesión `requests`
+con reintentos y timeout). CLI en `src/app.py`:
 
 ```bash
+python src/app.py consultar --endpoint ingresos_rol_competencia \
+    --competencia Familia --corte 30 --anio 2024
+python src/app.py descargar --anio 2024 --corte 30        # vuelca a CSV
+```
+
+### 1.2 API de descargas fila-a-fila — `/descargas/…`
+
+Bases con **una fila por causa** (o por causa × materia). Es la fuente principal
+del proyecto.
+
+**Catálogo** de un año/competencia (qué datasets existen y su `LINK`):
+
+```
+GET /pjen/cifras_clave/descargas/familia/<anio>
+```
+
+**Archivo** (ZIP con CSV, separador `;`, UTF-8):
+
+```
+https://estadisticaservices.pjud.cl/descargas/descargas<LINK><anio>-CSV.zip
+ej.: .../descargas/descargas/familia/Ingresos/Ingresos-2024-CSV.zip
+```
+
+Cada ZIP `-CSV` contiene:
+- **`…-Rol.csv`** → 1 fila por causa (clave `CRR CAUSA`).
+- **`…-Materia.csv`** → 1 fila por causa × materia (solo Ingresos y Términos).
+
+Los archivos son **nacionales**; la Región de Valparaíso se obtiene filtrando
+`COD. CORTE = 30`.
+
+**Conexión / pipeline:**
+
+```bash
+# 1) descargar los ZIP -CSV (Ingresos, Terminos, Inventario, Duracion, Audiencias)
 python src/descargar_pjud.py   --competencia familia --anios 2022 2023 2024
+# 2) extraer a CSV con nombres limpios en data/raw/familia/csv/
 python src/descomprimir_zips.py --entrada data/raw/familia
 ```
 
-## 4. Estructura del repo
+### 1.3 Qué se extrajo (2022–2024)
+
+Carpeta `data/raw/familia/` (no versionada). 15 ZIP · ~0,26 GB comprimido ·
+~2,4 GB en CSV.
+
+| Dataset | archivos por año | clave | notas |
+|---|---|---|---|
+| `Ingresos-<año>` | `-Rol.csv`, `-Materia.csv` | `CRR CAUSA` | fecha, tribunal, forma de inicio, marca VIF |
+| `Terminos-<año>` | `-Rol.csv`, `-Materia.csv` | `CRR CAUSA` | fecha ingreso y término, motivo de término |
+| `Inventario-<año>` | 1 archivo (al 31-12) | `CRR CAUSA` | causas en tramitación, etapa, última diligencia |
+| `Duracion-<año>` | 1 archivo | `CRR CAUSA` | `DURACIÓN CAUSA (DÍAS)` de las causas terminadas |
+| `Audiencias-<año>` | `-Realizadas.csv` | `CRR AUD` / `CRR CAUSA` | tipo de audiencia y duración (minutos) como columna |
+
+Inconsistencias entre años (a normalizar en el ETL): claves `CRR CAUSA` vs
+`CRR IDCAUSA` vs `ID_CAUSA`; fechas `dd-mm-yy` vs `dd/mm/yyyy`; encabezados con
+acentos rotos (mojibake). Ver `norm()` en `src/cruce_ingresos_terminos.py`.
+
+---
+
+## 2. Estructura del repositorio
 
 ```
 ├── data/
-│   ├── raw/         # descargas y CSV crudos (ignorado)
-│   └── processed/   # panel mensual / parquet filtrado a V Región (ignorado)
-├── notebooks/       # EDA y modelado
-├── reports/         # dashboards y figuras generadas (ignorado)
+│   ├── raw/          # ZIP y CSV crudos de PJUD            (ignorado)
+│   └── processed/    # panel mensual / parquet, Corte 30   (ignorado)
+├── notebooks/        # EDA y modelado
+├── reports/          # dashboards y figuras generadas      (ignorado)
 ├── src/
-│   ├── pjud_api.py               # cliente de la API agregada
-│   ├── app.py                    # CLI: consultar / descargar / dashboard
-│   ├── descargar_pjud.py         # baja los ZIP -CSV por competencia y año
-│   ├── descomprimir_zips.py      # extrae los ZIP a CSV con nombres limpios
-│   └── cruce_ingresos_terminos.py# cruza ingresos vs términos por ID de causa
+│   ├── pjud_api.py                # cliente de la API agregada (/pjen)
+│   ├── app.py                     # CLI: consultar / descargar / dashboard
+│   ├── descargar_pjud.py          # baja los ZIP -CSV por competencia y año
+│   ├── descomprimir_zips.py       # extrae los ZIP a CSV con nombres limpios
+│   └── cruce_ingresos_terminos.py # cruza ingresos vs términos por ID de causa
 ├── docs/
-│   ├── API_PJUD.md               # referencia de ambas APIs
-│   └── usoapis.pdf               # documento oficial de códigos
-└── README_TALLER01.md            # enunciado original archivado
+│   ├── API_PJUD.md                # referencia de ambas APIs
+│   └── usoapis.pdf                # documento oficial de códigos
+├── requirements.txt
+└── README_TALLER01.md             # enunciado original archivado
 ```
 
-## 5. Puesta en marcha
+Los **datos no se versionan** (`.gitignore`): se regeneran con los scripts de
+`src/`. Solo se versiona código, documentación y notebooks.
+
+## 3. Puesta en marcha
 
 ```bash
-python -m venv .venv && .venv\Scripts\activate      # Windows
+python -m venv .venv
+.venv\Scripts\activate            # Windows
 pip install -r requirements.txt
+
+python src/descargar_pjud.py   --competencia familia --anios 2022 2023 2024
+python src/descomprimir_zips.py --entrada data/raw/familia
 ```
-
-Ejemplos:
-
-```bash
-# Serie agregada de ingresos de Familia en Valparaíso
-python src/app.py consultar --endpoint ingresos_rol_competencia --competencia Familia --corte 30 --anio 2024
-
-# Cruce ingreso↔término por ID, solo V Región, 2022-2024
-python src/cruce_ingresos_terminos.py \
-  --ingresos data/raw/familia/Ingresos-2022-CSV.zip data/raw/familia/Ingresos-2023-CSV.zip data/raw/familia/Ingresos-2024-CSV.zip \
-  --terminos data/raw/familia/Terminos-2022-CSV.zip data/raw/familia/Terminos-2023-CSV.zip data/raw/familia/Terminos-2024-CSV.zip \
-  --filtro-corte 30 --salida reports/cruce_familia_valparaiso
-```
-
-## 6. CRISP-DM
-
-| Fase | En este proyecto |
-|---|---|
-| **Business Understanding** | Reducir el atraso en Familia (V Región): predecir ingresos/términos mensuales y la duración de las causas para dimensionar dotación y agenda. Métrica de éxito: MAPE < 15 % en la demanda mensual y c-index > 0,70 en el modelo de duración. |
-| **Data Understanding** | API agregada + bases fila-a-fila de PJUD. Explorar estacionalidad, tendencia, quiebres (pandemia 2020, tribunales nuevos), calidad (mojibake, claves `CRR CAUSA`, formatos de fecha, multiplicidad por materia). |
-| **Data Preparation** | Filtrar `COD. CORTE = 30`, deduplicar por ID, construir panel `tribunal × mes` (ingresos, términos, inventario, audiencias). Marcar censura para causas sin término. Guardar en `data/processed/` como Parquet. |
-| **Modeling** | Demanda: SARIMA / Prophet y gradient boosting (LightGBM) con rezagos, modelo global jerárquico por tribunal. Duración: análisis de supervivencia (Cox, AFT, Random Survival Forest). |
-| **Evaluation** | Validación temporal (*time series split*). Métricas: MAE/RMSE/MAPE (demanda), c-index / Brier (duración). Comparar tribunales y contra estándares (tasa de resolución ≈ 100 %). |
-| **Deployment** | Dashboard (`reports/`) con proyección de demanda e inventario y simulación de capacidad ("¿cuántas salas para bajar la duración mediana en 2 meses?"). Reentrenamiento periódico al publicarse cada nuevo año. |
