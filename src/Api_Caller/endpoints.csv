@@ -1,0 +1,104 @@
+﻿path,operation_id,tag,parametros,cantidad_parametros
+/pjen/academia/{seccion}/{anio},get_pjen_academia,Poder Judicial en Números,"seccion, anio",2
+/pjen/academia_detalle/{seccion}/{anio},get_pjen_academia_detalle,Poder Judicial en Números,"seccion, anio",2
+/pjen/adquisiciones/{corte}/{anio},get_pjen_adquisiciones,Poder Judicial en Números,"corte, anio",2
+/pjen/adquisiciones_detalle/{corte}/{anio},get_pjen_adquisiciones_detalle,Poder Judicial en Números,"corte, anio",2
+/pjen/apoyo_civil/{corte}/{anio},get_pjen_apoyo_civil,Poder Judicial en Números,"corte, anio",2
+/pjen/apoyo_civil_detalle/{corte}/{anio},get_pjen_apoyo_civil_detalle,Poder Judicial en Números,"corte, anio",2
+/pjen/apoyo_crimen/{corte}/{anio},get_pjen_apoyo_crimen,Poder Judicial en Números,"corte, anio",2
+/pjen/apoyo_crimen_detalle/{corte}/{anio},get_pjen_apoyo_crimen_detalle,Poder Judicial en Números,"corte, anio",2
+/pjen/apoyo_familia/{corte}/{anio},get_pjen_apoyo_familia,Poder Judicial en Números,"corte, anio",2
+/pjen/apoyo_familia_detalle/{corte}/{anio},get_pjen_apoyo_familia_detalle,Poder Judicial en Números,"corte, anio",2
+/pjen/audiencias_realizadas_competencia/{corte}/{tribunal}/{competencia}/{anio},get_pjen_audiencias_realizadas_competencia,Poder Judicial en Números,"corte, tribunal, competencia, anio",4
+/pjen/audiencias_realizadas_competencia_detalle/{corte}/{tribunal}/{competencia}/{anio},get_pjen_audiencias_realizadas_competencia_detalle,Poder Judicial en Números,"corte, tribunal, competencia, anio",4
+/pjen/becas/{seccion}/{anio},get_pjen_becas,Poder Judicial en Números,"seccion, anio",2
+/pjen/becas_detalle/{seccion}/{anio},get_pjen_becas_detalle,Poder Judicial en Números,"seccion, anio",2
+/pjen/biblioteca/{corte}/{anio},get_pjen_biblioteca,Poder Judicial en Números,"corte, anio",2
+/pjen/biblioteca_detalle/{corte}/{anio},get_pjen_biblioteca_detalle,Poder Judicial en Números,"corte, anio",2
+/pjen/bienestar/{seccion}/{anio},get_pjen_bienestar,Poder Judicial en Números,"seccion, anio",2
+/pjen/bienestar_detalle/{seccion}/{anio},get_pjen_bienestar_detalle,Poder Judicial en Números,"seccion, anio",2
+/pjen/capacitaciones/{seccion}/{anio},get_pjen_capacitaciones,Poder Judicial en Números,"seccion, anio",2
+/pjen/capacitaciones_detalle/{seccion}/{anio},get_pjen_capacitaciones_detalle,Poder Judicial en Números,"seccion, anio",2
+/pjen/causas_en_tramitacion/{corte}/{tribunal}/{competencia}/{anio},get_pjen_causas_en_tramitacion,Poder Judicial en Números,"corte, tribunal, competencia, anio",4
+/pjen/causas_en_tramitacion_detalle/{corte}/{tribunal}/{competencia}/{anio},get_pjen_causas_en_tramitacion_detalle,Poder Judicial en Números,"corte, tribunal, competencia, anio",4
+/pjen/causas_tramitacion_competencia/{corte}/{tribunal}/{competencia}/{anio},get_pjen_causas_tramitacion_competencia,Poder Judicial en Números,"corte, tribunal, competencia, anio",4
+/pjen/causas_tramitacion_competencia_detalle/{corte}/{tribunal}/{competencia}/{anio},get_pjen_causas_tramitacion_competencia_detalle,Poder Judicial en Números,"corte, tribunal, competencia, anio",4
+/pjen/causas_tramitacion_competencia_totales/{competencia}/{anio},get_pjen_causas_tramitacion_competencia_totales,Poder Judicial en Números,"competencia, anio",2
+/pjen/cinj/{corte}/{anio},get_pjen_cinj,Poder Judicial en Números,"corte, anio",2
+/pjen/cinj_detalle/{corte}/{anio},get_pjen_cinj_detalle,Poder Judicial en Números,"corte, anio",2
+/pjen/coccmp/{corte}/{anio},get_pjen_coccmp,Poder Judicial en Números,"corte, anio",2
+/pjen/coccmp_detalle/{corte}/{anio},get_pjen_coccmp_detalle,Poder Judicial en Números,"corte, anio",2
+/pjen/consejo/{corte}/{anio},get_pjen_consejo,Poder Judicial en Números,"corte, anio",2
+/pjen/consejo_detalle/{corte}/{anio},get_pjen_consejo_detalle,Poder Judicial en Números,"corte, anio",2
+/pjen/documentos/{corte}/{anio},get_pjen_documentos,Poder Judicial en Números,"corte, anio",2
+/pjen/documentos_detalle/{corte}/{anio},get_pjen_documentos_detalle,Poder Judicial en Números,"corte, anio",2
+/pjen/dotacion_sexo/{seccion}/{anio},get_pjen_dotacion_sexo,Poder Judicial en Números,"seccion, anio",2
+/pjen/dotacion_sexo_detalle/{seccion}/{anio},get_pjen_dotacion_sexo_detalle,Poder Judicial en Números,"seccion, anio",2
+/pjen/dotacion_unidad/{seccion}/{anio},get_pjen_dotacion_unidad,Poder Judicial en Números,"seccion, anio",2
+/pjen/dotacion_unidad_detalle/{seccion}/{anio},get_pjen_dotacion_unidad_detalle,Poder Judicial en Números,"seccion, anio",2
+/pjen/duracion_audiencias_competencia/{corte}/{tribunal}/{competencia}/{anio},get_pjen_duracion_audiencias_competencia,Poder Judicial en Números,"corte, tribunal, competencia, anio",4
+/pjen/duracion_audiencias_competencia_detalle/{corte}/{tribunal}/{competencia}/{anio},get_pjen_duracion_audiencias_competencia_detalle,Poder Judicial en Números,"corte, tribunal, competencia, anio",4
+/pjen/duracion_causas_apelaciones/{corte}/{anio},get_pjen_duracion_causas_apelaciones,Poder Judicial en Números,"corte, anio",2
+/pjen/duracion_causas_apelaciones_detalle/{corte}/{anio},get_pjen_duracion_causas_apelaciones_detalle,Poder Judicial en Números,"corte, anio",2
+/pjen/duracion_causas_competencia/{corte}/{tribunal}/{competencia}/{anio},get_pjen_duracion_causas_competencia,Poder Judicial en Números,"corte, tribunal, competencia, anio",4
+/pjen/duracion_causas_competencia_detalle/{corte}/{tribunal}/{competencia}/{anio},get_pjen_duracion_causas_competencia_detalle,Poder Judicial en Números,"corte, tribunal, competencia, anio",4
+/pjen/duracion_causas_suprema/{corte}/{anio},get_pjen_duracion_causas_suprema,Poder Judicial en Números,"corte, anio",2
+/pjen/duracion_causas_suprema_detalle/{corte}/{anio},get_pjen_duracion_causas_suprema_detalle,Poder Judicial en Números,"corte, anio",2
+/pjen/duracion_de_causas/{corte}/{tribunal}/{competencia}/{anio},get_pjen_duracion_causas,Poder Judicial en Números,"corte, tribunal, competencia, anio",4
+/pjen/duracion_de_causas_detalle/{corte}/{tribunal}/{competencia}/{anio},get_pjen_duracion_causas_detalle,Poder Judicial en Números,"corte, tribunal, competencia, anio",4
+/pjen/ejecucion/{corte}/{anio},get_pjen_ejecucion,Poder Judicial en Números,"corte, anio",2
+/pjen/ejecucion_detalle/{corte}/{anio},get_pjen_ejecucion_detalle,Poder Judicial en Números,"corte, anio",2
+/pjen/equipamiento/{corte}/{anio},get_pjen_equipamiento,Poder Judicial en Números,"corte, anio",2
+/pjen/equipamiento_detalle/{corte}/{anio},get_pjen_equipamiento_detalle,Poder Judicial en Números,"corte, anio",2
+/pjen/evolucion/{corte}/{anio},get_pjen_evolucion,Poder Judicial en Números,"corte, anio",2
+/pjen/evolucion_detalle/{corte}/{anio},get_pjen_evolucion_detalle,Poder Judicial en Números,"corte, anio",2
+/pjen/genero/{corte}/{anio},get_pjen_genero,Poder Judicial en Números,"corte, anio",2
+/pjen/genero_detalle/{corte}/{anio},get_pjen_genero_detalle,Poder Judicial en Números,"corte, anio",2
+/pjen/infraestructura/{corte}/{anio},get_pjen_infraestructura,Poder Judicial en Números,"corte, anio",2
+/pjen/infraestructura_detalle/{corte}/{anio},get_pjen_infraestructura_detalle,Poder Judicial en Números,"corte, anio",2
+/pjen/ingresos_competencia_apelaciones/{corte}/{anio},get_pjen_ingresos_competencia_apelaciones,Poder Judicial en Números,"corte, anio",2
+/pjen/ingresos_competencia_apelaciones_detalle/{corte}/{anio},get_pjen_ingresos_competencia_apelaciones_detalle,Poder Judicial en Números,"corte, anio",2
+/pjen/ingresos_materia_competencia/{corte}/{tribunal}/{competencia}/{anio},get_pjen_ingresos_materia_competencia,Poder Judicial en Números,"corte, tribunal, competencia, anio",4
+/pjen/ingresos_materia_competencia_detalle/{corte}/{tribunal}/{competencia}/{anio},get_pjen_ingresos_materia_competencia_detalle,Poder Judicial en Números,"corte, tribunal, competencia, anio",4
+/pjen/ingresos_por_materia/{corte}/{tribunal}/{competencia}/{anio},get_pjen_ingresos_por_materia,Poder Judicial en Números,"corte, tribunal, competencia, anio",4
+/pjen/ingresos_por_materia_detalle/{corte}/{tribunal}/{competencia}/{anio},get_pjen_ingresos_por_materia_detalle,Poder Judicial en Números,"corte, tribunal, competencia, anio",4
+/pjen/ingresos_por_rol/{corte}/{tribunal}/{competencia}/{anio},get_pjen_ingresos_por_rol,Poder Judicial en Números,"corte, tribunal, competencia, anio",4
+/pjen/ingresos_por_rol_detalle/{corte}/{tribunal}/{competencia}/{anio},get_pjen_ingresos_por_rol_detalle,Poder Judicial en Números,"corte, tribunal, competencia, anio",4
+/pjen/ingresos_recursos_apelaciones/{corte}/{anio},get_pjen_ingresos_recursos_apelaciones,Poder Judicial en Números,"corte, anio",2
+/pjen/ingresos_recursos_apelaciones_detalle/{corte}/{anio},get_pjen_ingresos_recursos_apelaciones_detalle,Poder Judicial en Números,"corte, anio",2
+/pjen/ingresos_recursos_suprema/{corte}/{anio},get_pjen_ingresos_recursos_suprema,Poder Judicial en Números,"corte, anio",2
+/pjen/ingresos_recursos_suprema_detalle/{corte}/{anio},get_pjen_ingresos_recursos_suprema_detalle,Poder Judicial en Números,"corte, anio",2
+/pjen/ingresos_rol_competencia/{corte}/{tribunal}/{competencia}/{anio},get_pjen_ingresos_rol_competencia,Poder Judicial en Números,"corte, tribunal, competencia, anio",4
+/pjen/ingresos_rol_competencia_detalle/{corte}/{tribunal}/{competencia}/{anio},get_pjen_ingresos_rol_competencia_detalle,Poder Judicial en Números,"corte, tribunal, competencia, anio",4
+/pjen/inventario_apelaciones/{corte}/{anio},get_pjen_inventario_apelaciones,Poder Judicial en Números,"corte, anio",2
+/pjen/inventario_apelaciones_detalle/{corte}/{anio},get_pjen_inventario_apelaciones_detalle,Poder Judicial en Números,"corte, anio",2
+/pjen/inventario_suprema/{corte}/{anio},get_pjen_inventario_suprema,Poder Judicial en Números,"corte, anio",2
+/pjen/inventario_suprema_detalle/{corte}/{anio},get_pjen_inventario_suprema_detalle,Poder Judicial en Números,"corte, anio",2
+/pjen/presupuesto/{corte}/{anio},get_pjen_presupuesto,Poder Judicial en Números,"corte, anio",2
+/pjen/presupuesto_detalle/{corte}/{anio},get_pjen_presupuesto_detalle,Poder Judicial en Números,"corte, anio",2
+/pjen/procedencia/{corte}/{anio},get_pjen_procedencia,Poder Judicial en Números,"corte, anio",2
+/pjen/procedencia_detalle/{corte}/{anio},get_pjen_procedencia_detalle,Poder Judicial en Números,"corte, anio",2
+/pjen/proyecto/{corte}/{anio},get_pjen_proyecto,Poder Judicial en Números,"corte, anio",2
+/pjen/proyecto_detalle/{corte}/{anio},get_pjen_proyecto_detalle,Poder Judicial en Números,"corte, anio",2
+/pjen/remuneraciones/{seccion}/{anio},get_pjen_remuneraciones,Poder Judicial en Números,"seccion, anio",2
+/pjen/remuneraciones_detalle/{seccion}/{anio},get_pjen_remuneraciones_detalle,Poder Judicial en Números,"seccion, anio",2
+/pjen/subsidios/{seccion}/{anio},get_pjen_subsidios,Poder Judicial en Números,"seccion, anio",2
+/pjen/subsidios_detalle/{seccion}/{anio},get_pjen_subsidios_detalle,Poder Judicial en Números,"seccion, anio",2
+/pjen/terminos_competencia_apelaciones/{corte}/{anio},get_pjen_terminos_competencia_apelaciones,Poder Judicial en Números,"corte, anio",2
+/pjen/terminos_competencia_apelaciones_detalle/{corte}/{anio},get_pjen_terminos_competencia_apelaciones_detalle,Poder Judicial en Números,"corte, anio",2
+/pjen/terminos_materia_competencia/{corte}/{tribunal}/{competencia}/{anio},get_pjen_terminos_materia_competencia,Poder Judicial en Números,"corte, tribunal, competencia, anio",4
+/pjen/terminos_materia_competencia_detalle/{corte}/{tribunal}/{competencia}/{anio},get_pjen_terminos_materia_competencia_detalle,Poder Judicial en Números,"corte, tribunal, competencia, anio",4
+/pjen/terminos_por_materia/{corte}/{tribunal}/{competencia}/{anio},get_pjen_terminos_por_materia,Poder Judicial en Números,"corte, tribunal, competencia, anio",4
+/pjen/terminos_por_materia_detalle/{corte}/{tribunal}/{competencia}/{anio},get_pjen_terminos_por_materia_detalle,Poder Judicial en Números,"corte, tribunal, competencia, anio",4
+/pjen/terminos_por_rol/{corte}/{tribunal}/{competencia}/{anio},get_pjen_terminos_por_rol,Poder Judicial en Números,"corte, tribunal, competencia, anio",4
+/pjen/terminos_por_rol_detalle/{corte}/{tribunal}/{competencia}/{anio},get_pjen_terminos_por_rol_detalle,Poder Judicial en Números,"corte, tribunal, competencia, anio",4
+/pjen/terminos_recursos_apelaciones/{corte}/{anio},get_pjen_terminos_recursos_apelaciones,Poder Judicial en Números,"corte, anio",2
+/pjen/terminos_recursos_apelaciones_detalle/{corte}/{anio},get_pjen_terminos_apelaciones_detalle,Poder Judicial en Números,"corte, anio",2
+/pjen/terminos_rol_competencia/{corte}/{tribunal}/{competencia}/{anio},get_pjen_terminos_rol_competencia,Poder Judicial en Números,"corte, tribunal, competencia, anio",4
+/pjen/terminos_rol_competencia_detalle/{corte}/{tribunal}/{competencia}/{anio},get_pjen_terminos_rol_competencia_detalle,Poder Judicial en Números,"corte, tribunal, competencia, anio",4
+/pjen/terminos_sala_suprema/{corte}/{anio},get_pjen_terminos_sala_suprema,Poder Judicial en Números,"corte, anio",2
+/pjen/terminos_sala_suprema_detalle/{corte}/{anio},get_pjen_terminos_sala_suprema_detalle,Poder Judicial en Números,"corte, anio",2
+/pjen/terminos_suprema/{corte}/{anio},get_pjen_terminos_suprema,Poder Judicial en Números,"corte, anio",2
+/pjen/terminos_suprema_detalle/{corte}/{anio},get_pjen_terminos_suprema_detalle,Poder Judicial en Números,"corte, anio",2
+/pjen/versus/{corte}/{anio},get_pjen_versus,Poder Judicial en Números,"corte, anio",2
+/pjen/versus_detalle/{corte}/{anio},get_pjen_versus_detalle,Poder Judicial en Números,"corte, anio",2

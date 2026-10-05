@@ -4,3 +4,5 @@ __pycache__/
 .env
 *.csv
 *.xlsx
+!src/Api_Caller/*.csv
+

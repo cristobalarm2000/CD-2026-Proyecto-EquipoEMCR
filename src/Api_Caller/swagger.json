@@ -1,0 +1,4262 @@
+{
+  "swagger": "2.0",
+  "basePath": "/",
+  "paths": {
+    "/civil/grafico/{corte}/{tribunal}/{ano}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "tribunal",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "ano",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_civil_grafico",
+        "tags": [
+          "Civil Quantum"
+        ]
+      }
+    },
+    "/civil/inventario/{corte}/{tribunal}/{ano}/{mes}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "tribunal",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "ano",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "mes",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_civil_inventario",
+        "tags": [
+          "Civil Quantum"
+        ]
+      }
+    },
+    "/civil/prearchivo/{corte}/{tribunal}/{ano}/{mes}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "tribunal",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "ano",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "mes",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_civil_prearchivo",
+        "tags": [
+          "Civil Quantum"
+        ]
+      }
+    },
+    "/civil/rebaja_causas/{corte}/{tribunal}/{ano}/{mes}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "tribunal",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "ano",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "mes",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_civil_rebaja_causas",
+        "tags": [
+          "Civil Quantum"
+        ]
+      }
+    },
+    "/civil/resumen_anual/{corte}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_civil_resumen_anual",
+        "tags": [
+          "Civil Quantum"
+        ]
+      }
+    },
+    "/cobranza/grafico/{corte}/{tribunal}/{ano}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "tribunal",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "ano",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_cobranza_grafico",
+        "tags": [
+          "Cobranza Quantum"
+        ]
+      }
+    },
+    "/cobranza/inventario/{corte}/{tribunal}/{ano}/{mes}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "tribunal",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "ano",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "mes",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_cobranza_inventario",
+        "tags": [
+          "Cobranza Quantum"
+        ]
+      }
+    },
+    "/cobranza/prearchivo/{corte}/{tribunal}/{ano}/{mes}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "tribunal",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "ano",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "mes",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_cobranza_prearchivo",
+        "tags": [
+          "Cobranza Quantum"
+        ]
+      }
+    },
+    "/cobranza/rebaja_causas/{corte}/{tribunal}/{ano}/{mes}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "tribunal",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "ano",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "mes",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_cobranza_rebaja_causas",
+        "tags": [
+          "Cobranza Quantum"
+        ]
+      }
+    },
+    "/cobranza/resumen_anual/{corte}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_cobranza_resumen_anual",
+        "tags": [
+          "Cobranza Quantum"
+        ]
+      }
+    },
+    "/corte/grafico/{corte}/{ano}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "ano",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_corte_grafico",
+        "tags": [
+          "Cortes de Apelaciones Quantum"
+        ]
+      }
+    },
+    "/corte/inventario/{corte}/{ano}/{mes}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "ano",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "mes",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_corte_inventario",
+        "tags": [
+          "Cortes de Apelaciones Quantum"
+        ]
+      }
+    },
+    "/corte/rebaja_causas/{corte}/{ano}/{mes}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "ano",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "mes",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_corte_rebaja_causas",
+        "tags": [
+          "Cortes de Apelaciones Quantum"
+        ]
+      }
+    },
+    "/corte/resumen_rebaja_causas/{corte}/{tribunal}/{ano}/{mes}/{competencia}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "tribunal",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "ano",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "mes",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "competencia",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_resumen_rebaja_causas",
+        "tags": [
+          "Cortes de Apelaciones Quantum"
+        ]
+      }
+    },
+    "/cuenta-publica/actividades": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_obtener_actividades_presidente",
+        "tags": [
+          "Cuenta Publica"
+        ]
+      }
+    },
+    "/cuenta-publica/ingresos-causas": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_obtener_ingresos_causas",
+        "tags": [
+          "Cuenta Publica"
+        ]
+      }
+    },
+    "/cuenta-publica/terminos-causas": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_obtener_terminos_causas",
+        "tags": [
+          "Cuenta Publica"
+        ]
+      }
+    },
+    "/cuenta-publica/terminos-cortes": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_obtener_terminos_cortes",
+        "tags": [
+          "Cuenta Publica"
+        ]
+      }
+    },
+    "/cuenta-publica/textos/{anio}": {
+      "parameters": [
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_obtener_textos",
+        "tags": [
+          "Cuenta Publica"
+        ]
+      }
+    },
+    "/cuenta-publica/tramitacion-causas": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_obtener_tramitacion_causas",
+        "tags": [
+          "Cuenta Publica"
+        ]
+      }
+    },
+    "/familia/grafico/{corte}/{tribunal}/{ano}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "tribunal",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "ano",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_familia_grafico",
+        "tags": [
+          "Familia Quantum"
+        ]
+      }
+    },
+    "/familia/inventario/{corte}/{tribunal}/{ano}/{mes}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "tribunal",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "ano",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "mes",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_familia_inventario",
+        "tags": [
+          "Familia Quantum"
+        ]
+      }
+    },
+    "/familia/rebaja_causas/{corte}/{tribunal}/{ano}/{mes}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "tribunal",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "ano",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "mes",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_familia_rebaja_causas",
+        "tags": [
+          "Familia Quantum"
+        ]
+      }
+    },
+    "/laboral/grafico/{corte}/{tribunal}/{ano}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "tribunal",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "ano",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_laboral_grafico",
+        "tags": [
+          "Laboral Quantum"
+        ]
+      }
+    },
+    "/laboral/inventario/{corte}/{tribunal}/{ano}/{mes}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "tribunal",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "ano",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "mes",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_laboral_inventario",
+        "tags": [
+          "Laboral Quantum"
+        ]
+      }
+    },
+    "/laboral/rebaja_causas/{corte}/{tribunal}/{ano}/{mes}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "tribunal",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "ano",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "mes",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_laboral_rebaja_causas",
+        "tags": [
+          "Laboral Quantum"
+        ]
+      }
+    },
+    "/laboral/resumen_anual/{corte}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_laboral_resumen_anual",
+        "tags": [
+          "Laboral Quantum"
+        ]
+      }
+    },
+    "/multi/resumen_rebaja_causas/{corte}/{tribunal}/{ano}/{mes}/{competencia}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "tribunal",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "ano",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "mes",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "competencia",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_resumen_rebaja_causas",
+        "tags": [
+          "Multicompetencias Quantum"
+        ]
+      }
+    },
+    "/penal/grafico/{corte}/{tribunal}/{ano}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "tribunal",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "ano",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_penal_grafico",
+        "tags": [
+          "Penal Quantum"
+        ]
+      }
+    },
+    "/penal/inventario/{corte}/{tribunal}/{ano}/{mes}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "tribunal",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "ano",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "mes",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_penal_inventario",
+        "tags": [
+          "Penal Quantum"
+        ]
+      }
+    },
+    "/penal/prearchivo/{corte}/{tribunal}/{ano}/{mes}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "tribunal",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "ano",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "mes",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_penal_prearchivo",
+        "tags": [
+          "Penal Quantum"
+        ]
+      }
+    },
+    "/penal/prearchivo_convenio/{corte}/{tribunal}/{ano}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "tribunal",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "ano",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_penal_prearchivo_mp",
+        "tags": [
+          "Penal Quantum"
+        ]
+      }
+    },
+    "/penal/rebaja_causas/{corte}/{tribunal}/{ano}/{mes}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "tribunal",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "ano",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "mes",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_penal_rebaja_causas",
+        "tags": [
+          "Penal Quantum"
+        ]
+      }
+    },
+    "/penal/resumen_anual/{corte}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_penal_resumen_anual",
+        "tags": [
+          "Penal Quantum"
+        ]
+      }
+    },
+    "/pjen/academia/{seccion}/{anio}": {
+      "parameters": [
+        {
+          "name": "seccion",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_academia",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/academia_detalle/{seccion}/{anio}": {
+      "parameters": [
+        {
+          "name": "seccion",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_academia_detalle",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/adquisiciones/{corte}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_adquisiciones",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/adquisiciones_detalle/{corte}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_adquisiciones_detalle",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/apoyo_civil/{corte}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_apoyo_civil",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/apoyo_civil_detalle/{corte}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_apoyo_civil_detalle",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/apoyo_crimen/{corte}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_apoyo_crimen",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/apoyo_crimen_detalle/{corte}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_apoyo_crimen_detalle",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/apoyo_familia/{corte}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_apoyo_familia",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/apoyo_familia_detalle/{corte}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_apoyo_familia_detalle",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/audiencias_realizadas_competencia/{corte}/{tribunal}/{competencia}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "tribunal",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "competencia",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_audiencias_realizadas_competencia",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/audiencias_realizadas_competencia_detalle/{corte}/{tribunal}/{competencia}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "tribunal",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "competencia",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_audiencias_realizadas_competencia_detalle",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/becas/{seccion}/{anio}": {
+      "parameters": [
+        {
+          "name": "seccion",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_becas",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/becas_detalle/{seccion}/{anio}": {
+      "parameters": [
+        {
+          "name": "seccion",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_becas_detalle",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/biblioteca/{corte}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_biblioteca",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/biblioteca_detalle/{corte}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_biblioteca_detalle",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/bienestar/{seccion}/{anio}": {
+      "parameters": [
+        {
+          "name": "seccion",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_bienestar",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/bienestar_detalle/{seccion}/{anio}": {
+      "parameters": [
+        {
+          "name": "seccion",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_bienestar_detalle",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/capacitaciones/{seccion}/{anio}": {
+      "parameters": [
+        {
+          "name": "seccion",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_capacitaciones",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/capacitaciones_detalle/{seccion}/{anio}": {
+      "parameters": [
+        {
+          "name": "seccion",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_capacitaciones_detalle",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/causas_en_tramitacion/{corte}/{tribunal}/{competencia}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "tribunal",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "competencia",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_causas_en_tramitacion",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/causas_en_tramitacion_detalle/{corte}/{tribunal}/{competencia}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "tribunal",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "competencia",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_causas_en_tramitacion_detalle",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/causas_tramitacion_competencia/{corte}/{tribunal}/{competencia}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "tribunal",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "competencia",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_causas_tramitacion_competencia",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/causas_tramitacion_competencia_detalle/{corte}/{tribunal}/{competencia}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "tribunal",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "competencia",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_causas_tramitacion_competencia_detalle",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/causas_tramitacion_competencia_totales/{competencia}/{anio}": {
+      "parameters": [
+        {
+          "name": "competencia",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_causas_tramitacion_competencia_totales",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/cinj/{corte}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_cinj",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/cinj_detalle/{corte}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_cinj_detalle",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/coccmp/{corte}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_coccmp",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/coccmp_detalle/{corte}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_coccmp_detalle",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/consejo/{corte}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_consejo",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/consejo_detalle/{corte}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_consejo_detalle",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/documentos/{corte}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_documentos",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/documentos_detalle/{corte}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_documentos_detalle",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/dotacion_sexo/{seccion}/{anio}": {
+      "parameters": [
+        {
+          "name": "seccion",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_dotacion_sexo",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/dotacion_sexo_detalle/{seccion}/{anio}": {
+      "parameters": [
+        {
+          "name": "seccion",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_dotacion_sexo_detalle",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/dotacion_unidad/{seccion}/{anio}": {
+      "parameters": [
+        {
+          "name": "seccion",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_dotacion_unidad",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/dotacion_unidad_detalle/{seccion}/{anio}": {
+      "parameters": [
+        {
+          "name": "seccion",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_dotacion_unidad_detalle",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/duracion_audiencias_competencia/{corte}/{tribunal}/{competencia}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "tribunal",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "competencia",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_duracion_audiencias_competencia",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/duracion_audiencias_competencia_detalle/{corte}/{tribunal}/{competencia}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "tribunal",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "competencia",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_duracion_audiencias_competencia_detalle",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/duracion_causas_apelaciones/{corte}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_duracion_causas_apelaciones",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/duracion_causas_apelaciones_detalle/{corte}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_duracion_causas_apelaciones_detalle",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/duracion_causas_competencia/{corte}/{tribunal}/{competencia}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "tribunal",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "competencia",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_duracion_causas_competencia",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/duracion_causas_competencia_detalle/{corte}/{tribunal}/{competencia}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "tribunal",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "competencia",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_duracion_causas_competencia_detalle",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/duracion_causas_suprema/{corte}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_duracion_causas_suprema",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/duracion_causas_suprema_detalle/{corte}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_duracion_causas_suprema_detalle",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/duracion_de_causas/{corte}/{tribunal}/{competencia}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "tribunal",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "competencia",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_duracion_causas",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/duracion_de_causas_detalle/{corte}/{tribunal}/{competencia}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "tribunal",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "competencia",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_duracion_causas_detalle",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/ejecucion/{corte}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_ejecucion",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/ejecucion_detalle/{corte}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_ejecucion_detalle",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/equipamiento/{corte}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_equipamiento",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/equipamiento_detalle/{corte}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_equipamiento_detalle",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/evolucion/{corte}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_evolucion",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/evolucion_detalle/{corte}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_evolucion_detalle",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/genero/{corte}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_genero",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/genero_detalle/{corte}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_genero_detalle",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/infraestructura/{corte}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_infraestructura",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/infraestructura_detalle/{corte}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_infraestructura_detalle",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/ingresos_competencia_apelaciones/{corte}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_ingresos_competencia_apelaciones",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/ingresos_competencia_apelaciones_detalle/{corte}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_ingresos_competencia_apelaciones_detalle",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/ingresos_materia_competencia/{corte}/{tribunal}/{competencia}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "tribunal",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "competencia",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_ingresos_materia_competencia",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/ingresos_materia_competencia_detalle/{corte}/{tribunal}/{competencia}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "tribunal",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "competencia",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_ingresos_materia_competencia_detalle",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/ingresos_por_materia/{corte}/{tribunal}/{competencia}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "tribunal",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "competencia",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_ingresos_por_materia",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/ingresos_por_materia_detalle/{corte}/{tribunal}/{competencia}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "tribunal",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "competencia",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_ingresos_por_materia_detalle",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/ingresos_por_rol/{corte}/{tribunal}/{competencia}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "tribunal",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "competencia",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_ingresos_por_rol",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/ingresos_por_rol_detalle/{corte}/{tribunal}/{competencia}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "tribunal",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "competencia",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_ingresos_por_rol_detalle",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/ingresos_recursos_apelaciones/{corte}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_ingresos_recursos_apelaciones",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/ingresos_recursos_apelaciones_detalle/{corte}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_ingresos_recursos_apelaciones_detalle",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/ingresos_recursos_suprema/{corte}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_ingresos_recursos_suprema",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/ingresos_recursos_suprema_detalle/{corte}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_ingresos_recursos_suprema_detalle",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/ingresos_rol_competencia/{corte}/{tribunal}/{competencia}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "tribunal",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "competencia",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_ingresos_rol_competencia",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/ingresos_rol_competencia_detalle/{corte}/{tribunal}/{competencia}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "tribunal",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "competencia",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_ingresos_rol_competencia_detalle",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/inventario_apelaciones/{corte}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_inventario_apelaciones",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/inventario_apelaciones_detalle/{corte}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_inventario_apelaciones_detalle",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/inventario_suprema/{corte}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_inventario_suprema",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/inventario_suprema_detalle/{corte}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_inventario_suprema_detalle",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/presupuesto/{corte}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_presupuesto",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/presupuesto_detalle/{corte}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_presupuesto_detalle",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/procedencia/{corte}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_procedencia",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/procedencia_detalle/{corte}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_procedencia_detalle",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/proyecto/{corte}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_proyecto",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/proyecto_detalle/{corte}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_proyecto_detalle",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/remuneraciones/{seccion}/{anio}": {
+      "parameters": [
+        {
+          "name": "seccion",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_remuneraciones",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/remuneraciones_detalle/{seccion}/{anio}": {
+      "parameters": [
+        {
+          "name": "seccion",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_remuneraciones_detalle",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/subsidios/{seccion}/{anio}": {
+      "parameters": [
+        {
+          "name": "seccion",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_subsidios",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/subsidios_detalle/{seccion}/{anio}": {
+      "parameters": [
+        {
+          "name": "seccion",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_subsidios_detalle",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/terminos_competencia_apelaciones/{corte}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_terminos_competencia_apelaciones",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/terminos_competencia_apelaciones_detalle/{corte}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_terminos_competencia_apelaciones_detalle",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/terminos_materia_competencia/{corte}/{tribunal}/{competencia}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "tribunal",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "competencia",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_terminos_materia_competencia",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/terminos_materia_competencia_detalle/{corte}/{tribunal}/{competencia}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "tribunal",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "competencia",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_terminos_materia_competencia_detalle",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/terminos_por_materia/{corte}/{tribunal}/{competencia}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "tribunal",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "competencia",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_terminos_por_materia",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/terminos_por_materia_detalle/{corte}/{tribunal}/{competencia}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "tribunal",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "competencia",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_terminos_por_materia_detalle",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/terminos_por_rol/{corte}/{tribunal}/{competencia}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "tribunal",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "competencia",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_terminos_por_rol",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/terminos_por_rol_detalle/{corte}/{tribunal}/{competencia}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "tribunal",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "competencia",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_terminos_por_rol_detalle",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/terminos_recursos_apelaciones/{corte}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_terminos_recursos_apelaciones",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/terminos_recursos_apelaciones_detalle/{corte}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_terminos_apelaciones_detalle",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/terminos_rol_competencia/{corte}/{tribunal}/{competencia}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "tribunal",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "competencia",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_terminos_rol_competencia",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/terminos_rol_competencia_detalle/{corte}/{tribunal}/{competencia}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "tribunal",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "competencia",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_terminos_rol_competencia_detalle",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/terminos_sala_suprema/{corte}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_terminos_sala_suprema",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/terminos_sala_suprema_detalle/{corte}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_terminos_sala_suprema_detalle",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/terminos_suprema/{corte}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_terminos_suprema",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/terminos_suprema_detalle/{corte}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_terminos_suprema_detalle",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/versus/{corte}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_versus",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    },
+    "/pjen/versus_detalle/{corte}/{anio}": {
+      "parameters": [
+        {
+          "name": "corte",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "anio",
+          "in": "path",
+          "required": true,
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "operationId": "get_pjen_versus_detalle",
+        "tags": [
+          "Poder Judicial en Números"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "Documentación Estadística Services",
+    "version": "1.0.3",
+    "description": "Se encuentra la documentación de todas las APIs disponibles en https://estadisticaservices.pjud.cl/"
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "tags": [
+    {
+      "name": "Civil Quantum",
+      "description": "Operaciones de la competencia Civil utilizados principalmente en Quantum"
+    },
+    {
+      "name": "Cobranza Quantum",
+      "description": "Operaciones de la competencia Cobranza utilizados principalmente en Quantum"
+    },
+    {
+      "name": "Cortes de Apelaciones Quantum",
+      "description": "Operaciones de las Cortes de Apelaciones utilizados principalmente en Quantum"
+    },
+    {
+      "name": "Familia Quantum",
+      "description": "Operaciones de la competencia Familia utilizados principalmente en Quantum"
+    },
+    {
+      "name": "Laboral Quantum",
+      "description": "Operaciones de la competencia Laboral utilizados principalmente en Quantum"
+    },
+    {
+      "name": "Multicompetencias Quantum",
+      "description": "Operaciones transversales a todas las competencias, utilizados principalmente en Quantum"
+    },
+    {
+      "name": "Penal Quantum",
+      "description": "Operaciones de la competencia Penal utilizados principalmente en Quantum"
+    },
+    {
+      "name": "Poder Judicial en Números",
+      "description": "Operaciones utilizadas en el Portal Poder Judicial en Números"
+    },
+    {
+      "name": "Cuenta Publica",
+      "description": "Operaciones utilizadas en el Portal Cuenta Pública"
+    }
+  ],
+  "responses": {
+    "ParseError": {
+      "description": "When a mask can't be parsed"
+    },
+    "MaskError": {
+      "description": "When any error occurs on mask"
+    }
+  }
+}
