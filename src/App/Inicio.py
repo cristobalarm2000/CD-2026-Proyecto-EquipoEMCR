@@ -1,70 +1,100 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import plotly.express as px
 
+# -----------------------------------------------------------------------------
 # 1. Configuración global de la aplicación
+# -----------------------------------------------------------------------------
 st.set_page_config(
-    page_title="Poder Judicial - Estudio de Audiencias",
+    page_title="Poder Judicial - Estudio de Audiencias (MVP Familia)",
     page_icon="⚖️",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
+# -----------------------------------------------------------------------------
 # 2. Definición de la página de Inicio
+# -----------------------------------------------------------------------------
 def pagina_inicio():
     st.title("⚖️ Poder Judicial de Chile")
-    st.subheader("Plataforma de Analítica de Audiencias Judiciales (Equipo EMCR)")
+    st.subheader("Plataforma de Inteligencia Judicial & Eficiencia Procesal (Equipo EMCR)")
 
     st.markdown("""
     Esta plataforma está orientada al **estudio, auditoría y análisis exploratorio integral de las Audiencias Realizadas** 
-    en el **Poder Judicial de Chile (PJUD)**, enfocado en la **Corte de Apelaciones de Valparaíso (Código 30)**.
+    en el **Poder Judicial de Chile (PJUD)**. Actualmente, el proyecto opera en modalidad **Producto Mínimo Viable (MVP)**, 
+    focalizado en la competencia de **Familia** para la **Corte de Apelaciones de Valparaíso (Código 30)**.
 
     ---
-    ### 🎯 Objetivos Estratégicos del Proyecto
-    - **Demanda y Carga Procesal:** Cuantificar el volumen histórico de audiencias por tribunal y materia (Familia, Laboral y Penal TOP).
-    - **Eficiencia y Tiempos:** Evaluar los plazos de agendamiento y la duración efectiva de las audiencias.
-    - **Adopción Tecnológica:** Analizar el impacto de la virtualidad (videoconferencias) y la presencialidad entre 2015 y 2025.
+    ### 🎯 Enfoque Estratégico del MVP
+    El propósito central de esta fase es **validar de extremo a extremo la metodología y los pipelines** de extracción vía API, 
+    tipificación estricta, compresión columnar (Apache Parquet) y auditoría de calidad de datos sobre una materia de alta 
+    demanda ciudadana como es **Familia** (2015–2025).
+
+    **Meta de Escalamiento:** Conforme a los resultados y validaciones técnicas obtenidas en este MVP, la metodología 
+    se extenderá progresivamente para aplicar este mismo análisis de audiencias a la **mayor cantidad de materias judiciales** 
+    posibles (Laboral, Penal/TOP y Civil) a nivel regional y nacional.
     """)
 
-    col1, col2 = st.columns(2)
-    with col1:
+    # Ficha técnica y métricas del MVP
+    c1, c2, c3, c4 = st.columns(4)
+    with c1:
+        st.metric("🏛️ Jurisdicción MVP", "Corte Valparaíso", "Código 30 (34 tribunales)")
+    with c2:
+        st.metric("📅 Horizonte Temporal", "2015 – 2025", "11 períodos anuales")
+    with c3:
+        st.metric("📊 Audiencias Auditadas", "466,178 filas", "128,401 causas únicas")
+    with c4:
+        st.metric("⚡ Compresión Parquet", "96.8% de ahorro", "238.9 MB → 7.71 MB")
+
+    st.markdown("---")
+
+    col_izq, col_der = st.columns(2)
+    with col_izq:
         st.info("""
-        #### 📥 Ingesta y Exploración de Microdatos
-        - **Fuente:** API oficial de estadísticas del PJUD (`/pjen/audiencias_realizadas_...`).
-        - **Jurisdicción:** Corte de Apelaciones de Valparaíso (34 tribunales).
-        - **Cobertura:** 2015 a 2025 (serie histórica continua).
-        - **Formato:** Apache Parquet optimizado (Snappy).
+        #### 🧪 Alcance Actual: Validación en Familia
+        - **Entidad:** `audiencias_realizadas_competencia_detalle`.
+        - **Cobertura Territorial:** 34 juzgados con competencia de Familia en la V Región (Viña del Mar, Valparaíso, Quillota, etc.).
+        - **Pipeline Validado:** Ingesta REST con política de reintentos, tipado fuerte (`Int64`, `datetime64[ns]`) y detección forense de inconsistencias.
+        - **Integridad Verificada:** 0 duplicados exactos (0,0%) y 12 variables con 100% de exhaustividad.
         """)
 
-    with col2:
+    with col_der:
         st.success("""
-        #### 📊 Inteligencia y Análisis del Negocio
-        - **Monitoreo de Congestión:** Comparativas directas entre tribunales de la región.
-        - **Patrones de Programación:** Plazos de espera entre ingreso, programación y realización.
-        - **Perfiles por Materia:** Análisis granular por tipo de procedimiento y audiencia.
+        #### 🚀 Hoja de Ruta: Expansión Multi-Materia
+        - **Paso 1 (Actual):** Consolidación de ETL, auditoría y análisis exploratorio (EDA) en **Familia**.
+        - **Paso 2:** Replicar pipeline de audiencias en **Laboral** (Juzgados de Letras del Trabajo).
+        - **Paso 3:** Adaptar modelos a **Penal** (Tribunales de Juicio Oral en lo Penal - TOP y Garantía).
+        - **Paso 4:** Integrar materia **Civil** y construir el comparador transversal de eficiencia procesal.
         """)
 
     st.markdown("""
     ---
-    ### 🚀 Cómo Navegar
-    - Usa el **menú en la barra lateral izquierda**:
-      - `1.- Ingesta de Datos`: Para consultar microdatos desde la API PJUD, gestionar descargas y explorar el dataset Parquet consolidado en tiempo real.
+    ### 🧭 Cómo Navegar por la Plataforma
+    Usa el **menú en la barra lateral izquierda** para acceder a los módulos del proyecto:
+    - **`Inicio`**: Portada institucional, contexto estratégico del MVP y hoja de ruta de escalamiento.
+    - **`1.- Ingesta de Datos`**: Módulo interactivo de extracción desde la API estadística del PJUD, monitoreo de descargas y consolidación a Parquet.
+    - **`2.- ETL`**: Publicación interactiva fiel del cuaderno técnico [`01 ETL_audienciasparquet.ipynb`](notebooks), que comprende la carga del Parquet y la auditoría exhaustiva de calidad (dimensiones, perfiles de nulos, frecuencias categóricas, variables numéricas/temporales y missingness).
     """)
 
+# -----------------------------------------------------------------------------
 # 3. Configuración de Navegación Multi-página (Streamlit Navigation)
+# -----------------------------------------------------------------------------
 pagina_home = st.Page(pagina_inicio, title="Inicio", icon="🏠", default=True)
 pagina_ingesta = st.Page("pages/1.- Ingesta de Datos.py", title="1.- Ingesta de Datos", icon="📥")
+pagina_etl = st.Page("pages/2.- ETL.py", title="2.- ETL", icon="📊")
 
 pg = st.navigation({
-    "Menú Principal": [pagina_home, pagina_ingesta]
+    "Menú Principal": [pagina_home, pagina_ingesta, pagina_etl]
 })
 
+# -----------------------------------------------------------------------------
 # 4. Información institucional en la barra lateral común
+# -----------------------------------------------------------------------------
 with st.sidebar:
     st.markdown("### 🏛️ Poder Judicial")
     st.caption("Jurisdicción Valparaíso (Corte 30)")
-    st.caption("Estudio Focalizado: Audiencias")
+    st.caption("**Modo MVP:** Competencia Familia")
+    st.caption("Objetivo: Expansión Multi-Materia")
     st.markdown("---")
 
 pg.run()
