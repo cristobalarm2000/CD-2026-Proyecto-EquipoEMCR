@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tiempo de Audiencia</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: una columna editorial; necesidad -> 3 gráficos -> 2 ideas de negocio que los usan */
+:root{
+  --bg:#F2F5F8; --surface:#FFFFFF; --ink:#14212B; --ink2:#44566A; --muted:#6B7C8C;
+  --line:#D5DDE5; --accent:#1F5F8B; --accent-soft:#D6E6F2; --warm:#C2571A; --warm-soft:#F6DCCB;
+  --grid:#E3E9EE;
+  --f-display:'Bricolage Grotesque','Segoe UI',system-ui,sans-serif;
+  --f-body:'IBM Plex Sans','Segoe UI',system-ui,sans-serif;
+  --f-mono:'IBM Plex Mono',ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0F1820; --surface:#18242F; --ink:#E8EEF3; --ink2:#B2C0CD; --muted:#8497A8;
+  --line:#2B3B49; --accent:#6DB3E0; --accent-soft:#1E3A4F; --warm:#F08F57; --warm-soft:#4A2E1D; --grid:#243340; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0F1820; --surface:#18242F; --ink:#E8EEF3; --ink2:#B2C0CD; --muted:#8497A8;
+  --line:#2B3B49; --accent:#6DB3E0; --accent-soft:#1E3A4F; --warm:#F08F57; --warm-soft:#4A2E1D; --grid:#243340; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--f-body);padding-inline:16px}
+.wrap{max-width:1040px;margin:0 auto;padding-block:40px 64px;display:flex;flex-direction:column;gap:56px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;line-height:1.1;letter-spacing:-.01em}
+h1{font-size:clamp(2.2rem,6vw,3.8rem);font-weight:800}
+h2{font-size:clamp(1.5rem,3.4vw,2.1rem);font-weight:800}
+h3{font-size:1.2rem;font-weight:600}
+p{margin:0}
+.eyebrow{font:500 .75rem var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.lead{font-size:1.15rem;color:var(--ink2);max-width:62ch}
+header{display:flex;flex-direction:column;gap:18px}
+.hero-stats{display:flex;flex-wrap:wrap;gap:12px 36px;padding-top:18px;border-top:2px solid var(--ink)}
+.hero-stats div{min-width:0}
+.hero-stats b{display:block;font:800 2rem var(--f-display);font-variant-numeric:tabular-nums}
+.hero-stats span{font-size:.85rem;color:var(--muted)}
+section{display:flex;flex-direction:column;gap:22px}
+.needs{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+.need{border-top:3px solid var(--accent);padding-top:12px;display:flex;flex-direction:column;gap:6px}
+.need p{color:var(--ink2);font-size:.95rem}
+.charts{display:flex;flex-direction:column;gap:20px}
+.chart{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:20px;display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:24px;align-items:center}
+.chart .txt{display:flex;flex-direction:column;gap:10px;min-width:0}
+.chart .txt p{color:var(--ink2);font-size:.95rem}
+.chart .tag{font:500 .72rem var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.chart .use{font-size:.88rem;padding:8px 10px;background:var(--accent-soft);border-radius:6px;color:var(--ink)}
+.plot{min-width:0}
+svg{display:block;width:100%;height:auto;overflow:visible}
+svg text{font-family:var(--f-body);fill:var(--ink2);font-size:11px}
+svg .num{font-family:var(--f-mono);fill:var(--ink);font-size:11px}
+.ideas{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:20px}
+.idea{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:26px;display:flex;flex-direction:column;gap:16px;min-width:0}
+.idea.b{border-color:var(--warm)}
+.idea .pill{align-self:flex-start;font:500 .72rem var(--f-mono);letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:99px;background:var(--accent-soft);color:var(--accent)}
+.idea.b .pill{background:var(--warm-soft);color:var(--warm)}
+.idea dl{margin:0;display:grid;gap:12px}
+.idea dt{font:500 .72rem var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.idea dd{margin:2px 0 0;color:var(--ink2);font-size:.95rem}
+.idea ul{margin:2px 0 0;padding-left:18px;color:var(--ink2);font-size:.95rem}
+.src{display:flex;flex-wrap:wrap;gap:6px}
+.src span{font:500 .72rem var(--f-mono);padding:3px 8px;border:1px solid var(--line);border-radius:4px;color:var(--ink2)}
+.note{font-size:.85rem;color:var(--muted);border-top:1px solid var(--line);padding-top:16px;max-width:80ch}
+.tip{position:fixed;pointer-events:none;background:var(--ink);color:var(--bg);font-size:.8rem;padding:5px 9px;border-radius:5px;opacity:0;transition:opacity .1s;z-index:5;white-space:nowrap}
+@media (max-width:760px){.chart{grid-template-columns:minmax(0,1fr)}.wrap{gap:44px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+<header>
+  <span class="eyebrow">PJUD · Familia · C.A. Valparaíso · 2015–2025</span>
+  <h1>¿Cuánto tarda realmente una audiencia de Familia?</h1>
+  <p class="lead">466.178 audiencias de 34 tribunales muestran que la espera para ser atendido cambia mucho según el año, el tribunal y la modalidad. Hoy los estudios jurídicos no tienen cómo medirla. Estos datos permiten hacerlo.</p>
+  <div class="hero-stats">
+    <div><b>466 mil</b><span>audiencias analizadas</span></div>
+    <div><b>26 días</b><span>espera mediana (programación a audiencia)</span></div>
+    <div><b>18 a 74</b><span>días de espera mediana según tribunal</span></div>
+  </div>
+</header>
+
+<section>
+  <span class="eyebrow">Cliente: estudios y abogados de Familia</span>
+  <h2>Lo que necesitan y hoy no tienen</h2>
+  <div class="needs">
+    <div class="need"><h3>Fechas realistas</h3><p>Decirle al cliente cuándo podría ser su audiencia, sin depender de la experiencia de un solo abogado.</p></div>
+    <div class="need"><h3>Comparar tribunales</h3><p>Saber dónde se acumula la espera para estimar costos y decidir cómo cargar el trabajo del equipo.</p></div>
+    <div class="need"><h3>Planificar la cartera</h3><p>Anticipar cuántas audiencias caerán juntas y qué modalidad, remota o presencial, conviene pedir.</p></div>
+  </div>
+</section>
+
+<section>
+  <span class="eyebrow">Evidencia del EDA</span>
+  <h2>Tres gráficos, tres preguntas</h2>
+  <div class="charts">
+    <article class="chart">
+      <div class="plot"><svg id="c1" viewBox="0 0 520 260" role="img" aria-label="Mediana de espera anual 2015 a 2025"></svg></div>
+      <div class="txt">
+        <span class="tag">Gráfico 1 · Evolución anual</span>
+        <h3>La espera casi se duplicó y empezó a bajar</h3>
+        <p>La mediana pasó de 19 días en 2015 a 42 en 2022, con un volumen de audiencias casi constante. Desde 2024 está en 28–29 días.</p>
+        <p class="use">Sirve para: fijar el valor de referencia de "tiempo normal" y detectar cuándo se desvía.</p>
+      </div>
+    </article>
+    <article class="chart">
+      <div class="plot"><svg id="c2" viewBox="0 0 520 330" role="img" aria-label="Mediana de espera por tribunal 2022 a 2025"></svg></div>
+      <div class="txt">
+        <span class="tag">Gráfico 2 · Por tribunal (2022–2025)</span>
+        <h3>El mismo trámite espera 4 veces más en otro tribunal</h3>
+        <p>Limache y Quilpué esperan 18 y 19 días. Viña del Mar, el tribunal con más audiencias, espera 50. Quintero llega a 74.</p>
+        <p class="use">Sirve para: comparar tribunales y estimar la fecha de una causa según dónde se tramita.</p>
+      </div>
+    </article>
+    <article class="chart">
+      <div class="plot"><svg id="c3" viewBox="0 0 520 260" role="img" aria-label="Mediana de espera según modalidad 2021 a 2025"></svg></div>
+      <div class="txt">
+        <span class="tag">Gráfico 3 · Modalidad (2021–2025)</span>
+        <h3>Las audiencias remotas esperan más</h3>
+        <p>En todos los años, las audiencias por videoconferencia esperan entre 8 y 16 días más que las presenciales. Falta controlar por tipo de audiencia y tribunal.</p>
+        <p class="use">Sirve para: decidir cuándo pedir una modalidad u otra, una vez que el dato se confirme.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section>
+  <span class="eyebrow">Dos ideas de negocio</span>
+  <h2>Qué se puede construir con estos datos</h2>
+  <div class="ideas">
+    <article class="idea a">
+      <span class="pill">Idea 1 · Gráficos 1 y 2</span>
+      <h3>Radar de Espera</h3>
+      <p>Un panel que entrega, para cada tribunal de Familia, cuánto se espera hoy y cómo se compara con su historia y con el resto de la región.</p>
+      <dl>
+        <div><dt>Cómo lo usa el abogado</dt><dd>Ingresa tribunal y tipo de audiencia y recibe un rango de días para dar al cliente, por ejemplo "entre 18 y 33 días".</dd></div>
+        <div><dt>Qué incluye</dt><dd><ul><li>Ranking de tribunales por espera mediana y P75.</li><li>Alerta cuando un tribunal sube sobre su promedio.</li><li>Informe mensual para el estudio.</li></ul></dd></div>
+        <div><dt>Cómo se cobra</dt><dd>Suscripción mensual por estudio.</dd></div>
+        <div><dt>Datos que usa</dt><dd class="src"><span>PLAZO_AGENDAMIENTO</span><span>TRIBUNAL</span><span>ANO_PROCESO</span><span>TIPO_AUDIENCIA</span></dd></div>
+      </dl>
+    </article>
+    <article class="idea b">
+      <span class="pill">Idea 2 · Gráficos 1 y 3</span>
+      <h3>Planificador de Cartera</h3>
+      <p>Una herramienta que toma las causas vigentes de un estudio y proyecta cuándo caerán sus audiencias, para repartir al equipo y evitar choques de agenda.</p>
+      <dl>
+        <div><dt>Cómo lo usa el abogado</dt><dd>Carga su lista de RIT y ve un calendario proyectado con semanas de alta carga y la modalidad más probable.</dd></div>
+        <div><dt>Qué incluye</dt><dd><ul><li>Proyección de audiencias por semana y por tribunal.</li><li>Comparación de espera remota contra presencial.</li><li>Sugerencia de reparto entre abogados.</li></ul></dd></div>
+        <div><dt>Cómo se cobra</dt><dd>Plan por número de causas gestionadas.</dd></div>
+        <div><dt>Datos que usa</dt><dd class="src"><span>RIT</span><span>FECHA_PROGRAMACION</span><span>VIDEOCONFERENCIA</span><span>PLAZO_AGENDAMIENTO</span></dd></div>
+      </dl>
+    </article>
+  </div>
+  <p class="note">Las comparaciones por tribunal y por modalidad son descriptivas. No prueban causalidad y se deben controlar por tipo de audiencia antes de comercializar cualquier recomendación. El dato de videoconferencia existe solo desde 2021. Fuente: API estadística del PJUD, microdatos de audiencias realizadas, Familia, Corte de Apelaciones de Valparaíso.</p>
+</section>
+</div>
+<div class="tip" id="tip"></div>
+
+<script>
+const NS='http://www.w3.org/2000/svg', tip=document.getElementById('tip');
+function el(p,t,a,txt){const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);if(txt!==undefined)e.textContent=txt;p.appendChild(e);return e}
+function hover(e,msg){
+  e.addEventListener('mousemove',ev=>{tip.textContent=msg;tip.style.opacity=1;tip.style.left=(ev.clientX+12)+'px';tip.style.top=(ev.clientY+12)+'px'});
+  e.addEventListener('mouseleave',()=>tip.style.opacity=0)}
+const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+
+// Gráfico 1: mediana anual (días) con rango P25-P75
+const A=[[2015,19,10,29],[2016,21,10,30],[2017,23,11,33],[2018,24,12,34],[2019,24,11,35],[2020,25,12,42],[2021,35,15,53],[2022,42,20,64],[2023,38,18,57],[2024,28,13,53],[2025,29,13,50]];
+(function(){const s=document.getElementById('c1'),L=36,R=510,T=16,B=226,max=70;
+  const x=i=>L+(R-L)*i/(A.length-1), y=v=>B-(B-T)*v/max;
+  [0,20,40,60].forEach(v=>{el(s,'line',{x1:L,x2:R,y1:y(v),y2:y(v),stroke:'var(--grid)'});el(s,'text',{x:L-6,y:y(v)+4,'text-anchor':'end'},v)});
+  el(s,'text',{x:L,y:8},'Días');
+  el(s,'path',{d:'M'+A.map((a,i)=>x(i)+','+y(a[3])).join('L')+'L'+A.map((a,i)=>x(A.length-1-i)+','+y(A[A.length-1-i][2])).join('L')+'Z',fill:'var(--accent-soft)'});
+  el(s,'line',{x1:x(5),x2:x(5),y1:T,y2:B,stroke:'var(--muted)','stroke-dasharray':'3 3'});
+  el(s,'text',{x:x(5)+4,y:T+10},'COVID');
+  el(s,'path',{d:'M'+A.map((a,i)=>x(i)+','+y(a[1])).join('L'),fill:'none',stroke:'var(--accent)','stroke-width':2.5});
+  A.forEach((a,i)=>{
+    el(s,'text',{x:x(i),y:B+16,'text-anchor':'middle'},a[0]);
+    const big=(i===0||i===7||i===10);
+    const c=el(s,'circle',{cx:x(i),cy:y(a[1]),r:big?5:3.5,fill:'var(--accent)',stroke:'var(--surface)','stroke-width':2});
+    if(big)el(s,'text',{x:x(i),y:y(a[1])-10,'text-anchor':'middle',class:'num'},a[1]);
+    const h=el(s,'rect',{x:x(i)-16,y:T,width:32,height:B-T,fill:'transparent'});
+    hover(h,a[0]+': mediana '+a[1]+' días (P25 '+a[2]+', P75 '+a[3]+')')});
+  el(s,'text',{x:(L+R)/2,y:B+34,'text-anchor':'middle'},'Banda: rango entre P25 y P75');
+})();
+
+// Gráfico 2: tribunales
+const Tr=[['Quintero',74,90],['La Ligua',72,84],['Viña del Mar',50,64],['San Antonio',40,47],['Quillota',33,63],['Villa Alemana',32,46],['Casablanca',31,59],['San Felipe',31,56],['Los Andes',28,41],['Valparaíso',25,56],['Quilpué',19,35],['Limache',18,33]];
+(function(){const s=document.getElementById('c2'),L=96,R=500,T=6,rh=25,max=100,x=v=>L+(R-L)*v/max;
+  [0,25,50,75,100].forEach(v=>{el(s,'line',{x1:x(v),x2:x(v),y1:T,y2:T+rh*Tr.length,stroke:'var(--grid)'});el(s,'text',{x:x(v),y:T+rh*Tr.length+14,'text-anchor':'middle'},v)});
+  el(s,'text',{x:R,y:T+rh*Tr.length+30,'text-anchor':'end'},'Días de espera. Claro: P75, oscuro: mediana');
+  Tr.forEach((t,i)=>{const y=T+i*rh;
+    el(s,'text',{x:L-8,y:y+rh/2+1,'text-anchor':'end'},t[0]);
+    el(s,'rect',{x:L,y:y+4,width:x(t[2])-L,height:rh-8,rx:2,fill:'var(--accent-soft)'});
+    const hi=t[1]>=70||t[1]<=19;
+    el(s,'rect',{x:L,y:y+4,width:x(t[1])-L,height:rh-8,rx:2,fill:hi?(t[1]>=70?'var(--warm)':'var(--accent)'):'var(--accent)',opacity:hi?1:.55});
+    el(s,'text',{x:x(t[2])+5,y:y+rh/2+4,class:'num'},t[1]);
+    const h=el(s,'rect',{x:0,y:y,width:520,height:rh,fill:'transparent'});
+    hover(h,t[0]+': mediana '+t[1]+' días, P75 '+t[2])});
+})();
+
+// Gráfico 3: modalidad
+const V=[[2021,33,43],[2022,39,55],[2023,35,49],[2024,26,37],[2025,28,36]];
+(function(){const s=document.getElementById('c3'),L=36,R=510,T=20,B=216,max=60,gw=(R-L)/V.length;
+  const y=v=>B-(B-T)*v/max;
+  [0,20,40,60].forEach(v=>{el(s,'line',{x1:L,x2:R,y1:y(v),y2:y(v),stroke:'var(--grid)'});el(s,'text',{x:L-6,y:y(v)+4,'text-anchor':'end'},v)});
+  el(s,'text',{x:L,y:10},'Días (mediana)');
+  V.forEach((v,i)=>{const cx=L+gw*i+gw/2,bw=30;
+    [[v[1],'var(--accent)',-bw-1,'Presencial'],[v[2],'var(--warm)',1,'Videoconferencia']].forEach(b=>{
+      const r=el(s,'rect',{x:cx+b[2],y:y(b[0]),width:bw,height:B-y(b[0]),rx:3,fill:b[1]});
+      el(s,'text',{x:cx+b[2]+bw/2,y:y(b[0])-5,'text-anchor':'middle',class:'num'},b[0]);
+      hover(r,v[0]+' · '+b[3]+': '+b[0]+' días')});
+    el(s,'text',{x:cx,y:B+16,'text-anchor':'middle'},v[0])});
+  el(s,'rect',{x:L,y:B+30,width:10,height:10,rx:2,fill:'var(--accent)'});el(s,'text',{x:L+16,y:B+39},'Presencial');
+  el(s,'rect',{x:L+100,y:B+30,width:10,height:10,rx:2,fill:'var(--warm)'});el(s,'text',{x:L+116,y:B+39},'Videoconferencia');
+})();
+</script>
+
+</body>
+</html>
