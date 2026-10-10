@@ -48,7 +48,7 @@ with st.sidebar:
     st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Poder_Judicial_de_Chile_%28logo%29.svg/1200px-Poder_Judicial_de_Chile_%28logo%29.svg.png", width=140)
     st.title("Notebook ETL")
     st.caption("Origen: `01 ETL_audienciasparquet.ipynb`")
-    st.caption("Materia: **Familia** (Corte 30 Valparaíso)")
+    st.caption("Materia: **Familia** (Nivel Nacional - 17 Cortes)")
     st.markdown("---")
     st.markdown("""
     **Índice del Cuaderno:**
@@ -400,27 +400,24 @@ def aplicar_transformaciones_etl(df_in):
         d['FLG_CRUCE_2023'] = d['ANO_PROCESO'] == 2023
 
     # 3.2 Categóricas
-    d['CORTE'] = d['CORTE'].apply(norm_text)
-    d['COMPETENCIA'] = d['COMPETENCIA'].apply(norm_text)
+    d['COMPETENCIA'] = 'FAMILIA'
     
-    cat_trib = {
-        88: 'JUZGADO DE LETRAS Y GARANTIA DE PETORCA',
-        94: 'JUZGADO DE LETRAS Y GARANTIA DE PUTAENDO',
-        103: 'JUZGADO DE LETRAS Y GARANTIA DE ISLA DE PASCUA',
-        660: 'JUZGADO DE LETRAS Y GARANTIA DE QUINTERO',
-        1261: 'JUZGADO DE FAMILIA DE CASABLANCA',
-        1262: 'JUZGADO DE FAMILIA DE LA LIGUA',
-        1263: 'JUZGADO DE FAMILIA DE LIMACHE',
-        1264: 'JUZGADO DE FAMILIA DE LOS ANDES',
-        1265: 'JUZGADO DE FAMILIA DE QUILLOTA',
-        1266: 'JUZGADO DE FAMILIA DE QUILPUE',
-        1267: 'JUZGADO DE FAMILIA DE SAN ANTONIO',
-        1268: 'JUZGADO DE FAMILIA DE SAN FELIPE',
-        1269: 'JUZGADO DE FAMILIA DE VALPARAISO',
-        1270: 'JUZGADO DE FAMILIA DE VILLA ALEMANA',
-        1271: 'JUZGADO DE FAMILIA DE VINA DEL MAR'
-    }
-    d['TRIBUNAL'] = d['COD_TRIBUNAL'].map(cat_trib).fillna(d['TRIBUNAL'].apply(norm_text))
+    path_cortes = BASE_DIR / "src/Api_Caller/cortes.csv"
+    if path_cortes.exists():
+        df_c = pd.read_csv(path_cortes)
+        cat_cortes = dict(zip(df_c['corte'], df_c['glosa_corte'].apply(norm_text)))
+        d['CORTE'] = d['COD_CORTE'].map(cat_cortes).fillna(d['CORTE'].apply(norm_text))
+    else:
+        d['CORTE'] = d['CORTE'].apply(norm_text)
+
+    path_trib = BASE_DIR / "src/Api_Caller/tribunales.csv"
+    if path_trib.exists():
+        df_t = pd.read_csv(path_trib)
+        df_t_uniq = df_t[['tribunal', 'glosa_tribunal']].drop_duplicates(subset=['tribunal'])
+        cat_trib = dict(zip(df_t_uniq['tribunal'], df_t_uniq['glosa_tribunal'].apply(norm_text)))
+        d['TRIBUNAL'] = d['COD_TRIBUNAL'].map(cat_trib).fillna(d['TRIBUNAL'].apply(norm_text))
+    else:
+        d['TRIBUNAL'] = d['TRIBUNAL'].apply(norm_text)
     
     map_proc = {
         'C': 'CONTENCIOSA', 'P': 'MEDIDAS DE PROTECCION', 'F': 'VIOLENCIA INTRAFAMILIAR',
@@ -444,13 +441,20 @@ def aplicar_transformaciones_etl(df_in):
         if pd.isna(s):
             return np.nan
         s_str = str(s).strip()
-        if not s_str or s_str == 'nan':
+        if not s_str or s_str.upper() in ['NAN', 'NONE', 'NULL', '[NULL]', 'NO REGISTRA', 'NO APLICA', 'S/I']:
             return np.nan
+        s_str = s_str.replace('.', ':')
         if len(s_str) == 4 and s_str[1] == ':':
             s_str = '0' + s_str
         if len(s_str) == 5 and s_str[2] == ':':
             s_str = s_str + ':00'
-        return s_str
+        parts = s_str.split(':')
+        if len(parts) >= 2 and parts[0].isdigit() and parts[1].isdigit():
+            hh = int(parts[0])
+            mm = int(parts[1])
+            ss = int(parts[2]) if (len(parts) > 2 and parts[2].isdigit()) else 0
+            return f"{hh:02d}:{mm:02d}:{ss:02d}"
+        return np.nan
 
     d['HORA_INICIO'] = d['HORA_INICIO'].apply(norm_hora)
     d['HORA_FIN'] = d['HORA_FIN'].apply(norm_hora)

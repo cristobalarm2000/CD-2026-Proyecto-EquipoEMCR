@@ -5,4 +5,4 @@ __pycache__/
 *.csv
 *.xlsx
 !src/Api_Caller/*.csv
-
+data/raw/05_muestras/*__0_0_*.json

@@ -46,7 +46,7 @@ df = cargar_datos_informe()
 with st.sidebar:
     st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Poder_Judicial_de_Chile_%28logo%29.svg/1200px-Poder_Judicial_de_Chile_%28logo%29.svg.png", width=130)
     st.title("Informe de Auditoría ETL")
-    st.caption("Jurisdicción: **Valparaíso** (Materia Familia)")
+    st.caption("Jurisdicción: **Nivel Nacional (17 Cortes)** (Materia Familia)")
     st.caption("Serie Temporal: **2015 – 2025** (11 períodos)")
     st.markdown("---")
     st.markdown("""
@@ -68,7 +68,7 @@ st.title("📋 Informe Ejecutivo: Hallazgos Forenses y Decisiones del ETL")
 st.markdown("### Auditoría de Calidad y Preparación de Microdatos Judiciales de Familia (2015–2025)")
 st.markdown("""
 Este informe interactivo documenta los **hallazgos empíricos críticos**, las **disyuntivas metodológicas** y las **decisiones de modelamiento** 
-adoptadas en el saneamiento de las **466.178 audiencias** de la Corte de Apelaciones de Valparaíso, con el propósito de construir una base sólida para 
+adoptadas en el saneamiento de las **3.526.516 audiencias** de las 17 Cortes de Apelaciones a nivel nacional, con el propósito de construir una base sólida para 
 la **Inteligencia de Negocios en un Estudio de Abogados**.
 """)
 
@@ -129,11 +129,11 @@ if "1. 🔍 Rescate Crítico" in hito_sel:
     with col_h1_a:
         st.markdown("""
         #### 🚨 El Hallazgo Forense
-        Al auditar la serie temporal 2015–2025, se descubrió una anomalía grave y masiva concentrada **exclusivamente en el año 2023 (43.380 registros)**:
+        Al auditar la serie temporal 2015–2025, se descubrió una anomalía grave y masiva concentrada **exclusivamente en el año 2023 (350.149 registros a nivel nacional)**:
         - La respuesta JSON/REST de la API estadística del Poder Judicial entregó las columnas **desplazadas una posición hacia la izquierda**.
         - La `FECHA_INGRESO` venía alojada en el campo `RIT`.
         - La `FECHA_PROGRAMACION` venía alojada en el campo `RUC`.
-        - Las columnas sustantivas de fecha figuraban con **43.380 valores nulos (100% vacías en 2023)**.
+        - Las columnas sustantivas de fecha figuraban con **350.149 valores nulos (100% vacías en 2023)**.
         - Los campos de `TIPO_PROCEDIMIENTO` y `TIPO_AUDIENCIA` contenían valores espurios o incompletos.
         """)
 
@@ -191,21 +191,21 @@ elif "2. 🏷️ Identificación de Causas" in hito_sel:
         
         st.info("""
         💡 **Impacto Directo para la Inteligencia del Estudio:**
-        Esta clave permitió consolidar las **466.178 audiencias** en exactamente **280.795 causas judiciales únicas**. 
-        Descubrimos que la tasa de recurrencia en derecho de familia es de **1,66 audiencias por causa judicial**, dato esencial para proyectar costos y tiempos de tramitación.
+        Esta clave permitió consolidar las **3.526.516 audiencias** en exactamente **2.266.379 causas judiciales únicas**. 
+        Descubrimos que la tasa de recurrencia en derecho de familia es de **1,56 audiencias por causa judicial**, dato esencial para proyectar costos y tiempos de tramitación.
         """)
     with c_r2:
         st.markdown("#### 📈 Granularidad del Dataset:")
         fig_gauge = go.Figure(go.Indicator(
             mode = "gauge+number",
-            value = 280795,
-            title = {'text': "<b>Causas Judiciales Únicas</b><br><span style='font-size:0.8em;color:gray'>Sobre 466.178 Audiencias Totales</span>"},
+            value = 2266379,
+            title = {'text': "<b>Causas Judiciales Únicas</b><br><span style='font-size:0.8em;color:gray'>Sobre 3.526.516 Audiencias Totales</span>"},
             gauge = {
-                'axis': {'range': [0, 466178]},
+                'axis': {'range': [0, 3526516]},
                 'bar': {'color': "#1f77b4"},
                 'steps': [
-                    {'range': [0, 280795], 'color': "#e6f2ff"},
-                    {'range': [280795, 466178], 'color': "#f9f9f9"}
+                    {'range': [0, 2266379], 'color': "#e6f2ff"},
+                    {'range': [2266379, 3526516], 'color': "#f9f9f9"}
                 ],
             }
         ))
@@ -368,9 +368,9 @@ elif "6. 🚀 Modelo Enriquecido" in hito_sel:
     with c_arch1:
         st.metric("Ruta del Archivo", "data/processed/audiencias_preparadas_modelo.parquet")
     with c_arch2:
-        st.metric("Dimensiones Finales", "466,178 filas x 36 columnas")
+        st.metric("Dimensiones Finales", "3,526,516 filas x 36 columnas")
     with c_arch3:
-        st.metric("Tamaño en Disco", "10.77 MB (Snappy Columnar)", "Carga en 0.13 segundos")
+        st.metric("Tamaño en Disco", "82.52 MB (Snappy Columnar)", "Carga en ~0.5 segundos")
 
     st.success("""
     🎉 **Hito Cumplido:** El pipeline de ETL está **100% finalizado, auditado y desacoplado**. El artefacto Parquet alimenta de forma directa e independiente la página **`4.- Dashboard BI`** de esta misma aplicación.
@@ -397,22 +397,22 @@ matriz_comp = pd.DataFrame({
     "Estado Original (Raw API PJUD)": [
         "20 columnas crudas",
         "Solo 12 de 20 columnas (60%)",
-        "> 1.300.000 celdas vacías (RUC 81% nulo)",
-        "Columnas desfasadas a la izquierda (43.380 RITs perdidos)",
-        "RIT relativo por juzgado con 41.439 errores '--'",
-        "22 casos con fecha de audiencia anterior a programación",
+        "> 10.000.000 celdas vacías (RUC 81% nulo, fechas 2023)",
+        "Columnas desfasadas a la izquierda (350.149 causas afectadas)",
+        "RIT relativo por juzgado con miles de errores '--'",
+        "401 casos con fecha de audiencia anterior a programación",
         "Ninguna (solo marcas operativas del SITFA)",
-        "> 700 MB (JSONs anuales) / 238 MB Parquet no optimizado"
+        "> 5.5 GB (JSONs anuales) / 1.8 GB Parquet no optimizado"
     ],
     "Modelo Final Preparado (ETL EMCR)": [
         "36 columnas estructuradas",
         "36 de 36 columnas (100.00%)",
         "0 valores nulos (100% completitud total)",
         "100% saneado mediante cruce relacional oficial PJUD",
-        "Clave compuesta canónica ID_CAUSA_RIT (280.795 causas únicas)",
+        "Clave compuesta canónica ID_CAUSA_RIT (2.266.379 causas únicas)",
         "0 inconsistencias (100% cronología universal)",
         "16 métricas de BI (SLAs, Time-tracking, Litigiosidad, Tramos)",
-        "10.77 MB en Apache Parquet columnar (Snappy)"
+        "82.52 MB en Apache Parquet columnar (Snappy)"
     ]
 })
 

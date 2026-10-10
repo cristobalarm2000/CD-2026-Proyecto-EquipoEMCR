@@ -1,28 +1,29 @@
 # Informe Técnico: Auditoría y Perfil de Calidad de Datos
 ## Entidad de Estudio: Audiencias Realizadas (Competencia Familia)
-**Jurisdicción:** Corte de Apelaciones de Valparaíso (Código 30)  
+**Jurisdicción:** 17 Cortes de Apelaciones (Nivel Nacional)  
 **Período Temporal:** 2015 – 2025 (11 períodos anuales completos)  
 **Dataset Auditado:** `audiencias_realizadas_competencia_detalle.parquet`  
-**Proyecto:** CD-2026-Proyecto-EquipoEMCR  
+**Proyecto:** CD-2026-Proyecto-EquipoEMCR (Rama: Test_nacional)  
 **Fecha de Emisión:** Octubre 2026  
 
 ---
 
 ## 1. Resumen Ejecutivo de la Auditoría
 
-El presente informe expone los resultados del análisis exploratorio inicial y la auditoría exhaustiva de calidad de datos realizada sobre el dataset consolidado de microdatos judiciales de **Audiencias Realizadas** para la jurisdicción de la Corte de Apelaciones de Valparaíso (2015-2025).
+El presente informe expone los resultados del análisis exploratorio inicial y la auditoría exhaustiva de calidad de datos realizada sobre el dataset consolidado de microdatos judiciales de **Audiencias Realizadas** para la totalidad de las 17 Cortes de Apelaciones a nivel nacional en la competencia de Familia (2015-2025).
 
-El dataset analizado cuenta con un volumen total de **466.178 registros** y **22 variables**, obtenido a partir de la ingesta automatizada de la API de estadísticas del Poder Judicial de Chile (PJUD).
+El dataset analizado cuenta con un volumen total de **3.526.516 registros** y **22 variables**, obtenido a partir de la ingesta automatizada de la API de estadísticas del Poder Judicial de Chile (PJUD).
 
 ### Ficha Resumen de Integridad General
 
 | Métrica | Valor Observado | Diagnóstico Técnico |
 | :--- | :--- | :--- |
-| **Total de Registros** | 466.178 filas | Volumen completo post-ingesta sin pérdidas de carga |
+| **Total de Registros** | 3.526.516 filas | Volumen nacional completo post-ingesta sin pérdidas de carga |
 | **Total de Columnas** | 22 variables | Esquema columnar consolidado |
 | **Duplicados Exactos** | 0 filas (0,0%) | No existen filas idénticas redundantes |
-| **RIT con Registros Múltiples** | 337.777 filas | Consistente con la naturaleza procesal (múltiples audiencias por causa) |
-| **Causas Únicas (por RIT)** | 128.401 causas | Gran diversidad muestral a lo largo de 11 años |
+| **Causas Únicas (`ID_CAUSA_RIT`)** | 2.266.379 causas | Gran diversidad muestral a lo largo de 11 años en 141 tribunales |
+| **Tribunales Canónicos** | 141 juzgados | Cobertura total de juzgados de Familia y mixtos a nivel nacional |
+| **Cortes de Apelaciones** | 17 cortes | 100% de las jurisdicciones del país representadas |
 | **Columnas Críticas con Alto Nulo** | 5 columnas (>50% nulos) | Atributos no disponibles en años tempranos o no aplicables |
 
 ---

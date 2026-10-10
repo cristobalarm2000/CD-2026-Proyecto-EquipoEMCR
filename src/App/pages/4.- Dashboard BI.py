@@ -50,8 +50,20 @@ if df_raw.empty:
 with st.sidebar:
     st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Poder_Judicial_de_Chile_%28logo%29.svg/1200px-Poder_Judicial_de_Chile_%28logo%29.svg.png", width=130)
     st.title("Filtros Ejecutivos BI")
-    st.caption("Jurisdicción: **Corte de Valparaíso** (Materia Familia)")
+    st.caption("Jurisdicción: **Nivel Nacional (17 Cortes)** | Materia: **Familia**")
     st.markdown("---")
+
+    # 0. Cortes de Apelaciones
+    cortes_disponibles = sorted(df_raw['CORTE'].dropna().unique().tolist())
+    sel_all_cortes = st.checkbox("Seleccionar todas las Cortes", value=True)
+    if sel_all_cortes:
+        cortes_sel = cortes_disponibles
+    else:
+        cortes_sel = st.multiselect(
+            "🏛️ Cortes de Apelaciones:",
+            options=cortes_disponibles,
+            default=cortes_disponibles[:2]
+        )
 
     # 1. Rango de Años
     anios_disponibles = sorted(df_raw['ANO_AUDIENCIA'].dropna().unique().tolist())
@@ -71,8 +83,8 @@ with st.sidebar:
         help="Área de práctica legal en derecho de familia"
     )
 
-    # 3. Tribunal
-    tribunales_disponibles = sorted(df_raw['TRIBUNAL'].dropna().unique().tolist())
+    # 3. Tribunal (en cascada según las cortes seleccionadas)
+    tribunales_disponibles = sorted(df_raw[df_raw['CORTE'].isin(cortes_sel)]['TRIBUNAL'].dropna().unique().tolist())
     sel_all_trib = st.checkbox("Seleccionar todos los tribunales", value=True)
     if sel_all_trib:
         tribunales_sel = tribunales_disponibles
@@ -80,7 +92,7 @@ with st.sidebar:
         tribunales_sel = st.multiselect(
             "🏛️ Tribunales:",
             options=tribunales_disponibles,
-            default=tribunales_disponibles[:3]
+            default=tribunales_disponibles[:3] if len(tribunales_disponibles) >= 3 else tribunales_disponibles
         )
 
     # 4. Modalidad
@@ -98,6 +110,8 @@ with st.sidebar:
 # -----------------------------------------------------------------------------
 mask = pd.Series(True, index=df_raw.index)
 
+if cortes_sel:
+    mask &= df_raw['CORTE'].isin(cortes_sel)
 if anios_sel:
     mask &= df_raw['ANO_AUDIENCIA'].isin(anios_sel)
 if materias_sel:
