@@ -73,7 +73,9 @@ def pagina_inicio():
     Usa el **menú en la barra lateral izquierda** para acceder a los módulos del proyecto:
     - **`Inicio`**: Portada institucional, contexto estratégico del MVP y hoja de ruta de escalamiento.
     - **`1.- Ingesta de Datos`**: Módulo interactivo de extracción desde la API estadística del PJUD, monitoreo de descargas y consolidación a Parquet.
-    - **`2.- ETL`**: Publicación interactiva fiel del cuaderno técnico [`01 ETL_audienciasparquet.ipynb`](notebooks), que comprende la carga del Parquet y la auditoría exhaustiva de calidad (dimensiones, perfiles de nulos, frecuencias categóricas, variables numéricas/temporales y missingness).
+    - **`2.- Notebook ETL`**: Publicación interactiva del cuaderno técnico [`01 ETL_audienciasparquet.ipynb`](notebooks) con el código ejecutable de las 7 fases de limpieza, imputación y persistencia.
+    - **`3.- Informe ETL`**: Informe ejecutivo interactivo enfocado en los **hallazgos forenses y decisiones estratégicas** adoptadas durante el saneamiento del dataset.
+    - **`4.- Dashboard BI`**: Tablero ejecutivo de Business Intelligence orientado a estudios jurídicos (gestión de plazos, SLAs, capacidad de salas, litigiosidad y productividad telemática).
     """)
 
 # -----------------------------------------------------------------------------
@@ -81,10 +83,12 @@ def pagina_inicio():
 # -----------------------------------------------------------------------------
 pagina_home = st.Page(pagina_inicio, title="Inicio", icon="🏠", default=True)
 pagina_ingesta = st.Page("pages/1.- Ingesta de Datos.py", title="1.- Ingesta de Datos", icon="📥")
-pagina_etl = st.Page("pages/2.- ETL.py", title="2.- ETL", icon="📊")
+pagina_notebook_etl = st.Page("pages/2.- Notebook ETL.py", title="2.- Notebook ETL", icon="📊")
+pagina_informe_etl = st.Page("pages/3.- Informe ETL.py", title="3.- Informe ETL", icon="📋")
+pagina_dashboard = st.Page("pages/4.- Dashboard BI.py", title="4.- Dashboard BI", icon="📈")
 
 pg = st.navigation({
-    "Menú Principal": [pagina_home, pagina_ingesta, pagina_etl]
+    "Menú Principal": [pagina_home, pagina_ingesta, pagina_notebook_etl, pagina_informe_etl, pagina_dashboard]
 })
 
 # -----------------------------------------------------------------------------
