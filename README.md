@@ -1,54 +1,141 @@
-# Inteligencia Judicial & Eficiencia Procesal (PJUD Chile)
-
-## Contexto del Proyecto
-El proyecto analiza microdatos públicos del **Poder Judicial de Chile (PJUD)** centrados en las **Audiencias Realizadas**, abordando inicialmente la competencia de **Familia**.
-
-- **Cliente Objetivo:** Estudios jurídicos y abogados.
-- **Meta General:** Proveer inteligencia de negocio para comparar la eficiencia del sistema judicial entre distintas ramas del derecho y optimizar la gestión estratégica de carteras de causas a nivel regional.
-- **Objetivo Actual (MVP):** Generación de un Producto Mínimo Viable (MVP) para validar los pipelines de extracción, transformación y carga (ETL) y el análisis exploratorio de datos (EDA) en la materia de Familia, estableciendo la base analítica para incorporar progresivamente otras materias (Civil, Laboral, Penal) y consolidar la solución final.
+# ⚖️ Inteligencia Judicial & Eficiencia Procesal (PJUD Chile)
+### Plataforma de Business Intelligence & Analytics para Estudios de Abogados
 
 ---
 
-## Ingesta y Consolidación de Datos
-Se realizó la ingesta automatizada de microdatos mediante la API estadística del PJUD bajo los siguientes parámetros:
-- **Corte:** Código `30` (Corte de Apelaciones de Valparaíso).
-- **Tribunal:** Código `0` (Consolidado regional de los 34 tribunales de la jurisdicción).
-- **Materia:** `Familia`.
-- **Rango temporal:** `2015` a `2025` (11 períodos anuales).
+## 📌 Contexto Estratégico del Proyecto
 
-El proceso extrajo 11 archivos crudos en formato JSON (~238.9 MB en total), los cuales se consolidaron en un dataset columnar **Parquet** de **466.178 registros y 22 columnas** (~7.71 MB), alcanzando una tasa de compresión y ahorro de almacenamiento del 96.8%.
+Este proyecto desarrolla una **plataforma integral de inteligencia de negocios (BI) y analítica judicial** basada en los microdatos públicos del **Poder Judicial de Chile (PJUD)**, focalizada en las **Audiencias Realizadas** de la jurisdicción de la **Corte de Apelaciones de Valparaíso (Código 30)** durante un decenio completo (**2015–2025**).
 
----
-
-## Hallazgos Esenciales de Calidad de Datos
-A partir de la auditoría y análisis exploratorio del dataset consolidado, se identificaron los siguientes aspectos clave:
-
-- **Volumen e Integridad General:** Se auditaron 466.178 filas que abarcan 128.401 causas únicas (por RIT). No existen duplicados exactos (0,0%) y 12 de las 22 variables cuentan con completitud absoluta (0% nulos).
-- **Variables con Alta Ausencia de Datos:** Campos como `RUC` (90,5%), `ID_CAUSA` (71,6%), `FECHA_FIRMA` (62,7%) y `VIDEOCONFERENCIA` (53,2%) presentan alta tasa de nulos debido a la evolución de los sistemas informáticos judiciales y a cambios normativos (por ejemplo, la obligatoriedad de firma electrónica y audiencias telemáticas introducidas por la Ley 21.226 a partir de finales de 2020).
-- **Heterogeneidad Categórica y Textual:** Disparidad en capitalización (mayúsculas y títulos) y acentuación en nombres de tribunales y categorías procesales (`TIPO_PROCEDIMIENTO` y `TIPO_AUDIENCIA`).
-- **Disparidad de Formatos:** La modalidad de `VIDEOCONFERENCIA` coexiste en múltiples representaciones (`SI`, `NO`, `1.0`, `0,0`), las marcas horarias se registran como texto (`object`), y las fechas siguen la representación estándar ISO 8601 (`AAAA-MM-DD`) sin componente de hora.
+- **Cliente Objetivo:** Estudios jurídicos, departamentos legales corporativos y abogados litigantes.
+- **Propuesta de Valor:**
+  - **Predictibilidad de Plazos y SLAs:** Predecir tiempos de espera de agendamiento y madurez de causas por juzgado para gestionar expectativas de clientes.
+  - **Estrategia de Pricing y Costeo:** Medir la tasa de litigiosidad y riesgo de continuaciones de juicio para tarificar honorarios (tarifa plana vs recargo por audiencia).
+  - **Capacidad de Sala y Time-Tracking:** Analizar la duración real en sala y la saturación semanal y horaria para evitar colisiones de comparecencia.
+  - **Productividad Telemática:** Cuantificar el ahorro en traslados y viáticos mediante la comparecencia remota (Ley 21.226 / 21.394).
+- **Estado Actual (MVP Certificado en Familia):** Producto Mínimo Viable (MVP) 100% completado en la competencia de **Familia**, sentando la arquitectura y metodología para su escalamiento a materias Laboral, Penal y Civil.
 
 ---
 
-## Estructura del Repositorio
+## 🚀 Arquitectura de la Plataforma Web (Streamlit)
+
+La plataforma cuenta con una interfaz web interactiva multi-página desacoplada y orientada a roles ejecutivos y técnicos:
 
 ```text
+src/App/
+├── Inicio.py                     # Portada institucional, navegación y alcance del MVP
+└── pages/
+    ├── 1.- Ingesta de Datos.py    # Monitoreo de extracción REST desde la API judicial
+    ├── 2.- Notebook ETL.py       # Réplica técnica ejecutable del cuaderno de 7 fases (código y lints)
+    ├── 3.- Informe ETL.py        # Informe interactivo ejecutivo de hallazgos forenses y decisiones procesales
+    └── 4.- Dashboard BI.py       # Tablero analítico ejecutivo interactivo con 5 vistas de negocio (Plotly)
+```
+
+### Módulos Principales de la Aplicación:
+1. **`Inicio`**: Visión general, contexto institucional del Poder Judicial y hoja de ruta de escalamiento multi-materia.
+2. **`1.- Ingesta de Datos`**: Monitoreo y ejecución de llamadas hacia la API estadística del PJUD, descarga de lotes anuales y consolidación inicial.
+3. **`2.- Notebook ETL`**: Publicación interactiva fiel del cuaderno [`01 ETL_audienciasparquet.ipynb`](notebooks/01%20ETL_audienciasparquet.ipynb), detallando cada una de las 7 fases del pipeline de datos con sus bloques de código, visualizaciones de nulos y verificación de tipos.
+4. **`3.- Informe ETL`**: Resumen ejecutivo interactivo estructurado en torno a los **hallazgos forenses y decisiones de negocio** (rescate del lote 2023, causa única `ID_CAUSA_RIT`, eliminación legal de `FECHA_FIRMA`, imputación de audiencias inmediatas y tratamiento de outliers).
+5. **`4.- Dashboard BI`**: Tablero directivo para estudios de abogados con filtros globales dinámicos (años, macro-materias, juzgados y modalidad telemática) y 5 pestañas analíticas:
+   * **⏱️ Tablero 1: SLAs y Predictibilidad de Plazos:** Benchmark de los 15 juzgados por días hábiles de espera y segmentación de cuellos de botella.
+   * **⚖️ Tablero 2: Litigiosidad y Riesgo de Costos:** Tasa de continuaciones, distribución de audiencias por causa y diseño de estructuras tarifarias.
+   * **🕒 Tablero 3: Capacidad de Sala y Time-Tracking:** Matriz de calor de saturación (Día $\times$ Franja horaria) y medianas de duración en sala.
+   * **💻 Tablero 4: Transformación Digital y Virtualidad:** Evolución de la comparecencia remota por Zoom y ranking de adopción por tribunal.
+   * **📑 Tablero 5: Explorador de Microdatos:** Consulta filtrada y exportación en CSV.
+
+---
+
+## 🛠️ Resumen del Pipeline de Datos (ETL y Feature Engineering)
+
+El pipeline procesa **466.178 registros de audiencias** a lo largo de 7 fases rigurosamente auditadas y sincronizadas entre el Jupyter Notebook, los reportes técnicos y la aplicación web:
+
+| Fase del Pipeline | Hito Metodológico | Decisión y Transformación Clave |
+| :--- | :--- | :--- |
+| **1. Carga de Datos** | Ingesta de Parquet crudo | Consolidación de 11 períodos anuales de la API PJUD (466.178 filas $\times$ 20 columnas). |
+| **2. Auditoría Inicial** | Perfil de calidad exploratorio | Diagnóstico de 1,3 millones de celdas vacías y detección de inconsistencias categóricas. |
+| **3. Limpieza y Estandarización** | Saneamiento y canonización | **Rescate del Lote 2023:** Cruce relacional oficial con `audiencias_realizadas_2023.csv` por `ID_AUDIENCIA` (43.380 registros rescatados). Normalización de 15 juzgados canónicos y 12 materias. Creación de **`ID_CAUSA_RIT`** (280.795 causas únicas). |
+| **4. Datos Faltantes** | Depuración y 100% completitud | **Anonimización y Depuración:** Eliminación de `RUC`, `ID_CAUSA`, `ID_AUDIENCIA` y **`FECHA_FIRMA`** (justificada por el principio de oralidad en Ley N° 19.968). **Imputación procesal:** 9.228 audiencias inmediatas imputadas con mismo día y espera `0` días. **Resultado: 100,00% completitud (0 nulos)**. |
+| **5. Valores Imposibles y Outliers** | Coherencia temporal | Corrección de 22 desfases administrativos en fechas (`FECHA_AUDIENCIA < FECHA_PROGRAMACION` $\rightarrow$ alineadas). **Decisión de Negocio:** No truncar plazos extremos (hasta 339 días hábiles) por reflejar cuellos de botella procesales reales (peritajes DAM/SML y suspensiones). |
+| **6. Feature Engineering** | Enriquecimiento para BI | Generación de **16 características analíticas derivadas** (calendario, lead times, time-tracking de sala, secuencia de causa y macro-materias). |
+| **7. Persistencia Definitiva** | Exportación del modelo | Generación de [`audiencias_preparadas_modelo.parquet`](data/processed/audiencias_preparadas_modelo.parquet) (**466.178 filas $\times$ 36 columnas**, 10,77 MB, 0 nulos). Carga en memoria en **0,13 segundos**. |
+
+---
+
+## 📊 Matriz Comparativa: El Antes vs El Después del Dataset
+
+| Dimensión Evaluada | Estado Original (API PJUD) | Modelo Preparado Final (EMCR) |
+| :--- | :--- | :--- |
+| **Estructura Tabular** | 20 columnas operativas crudas | **36 columnas analíticas especializadas** |
+| **Completitud de Celdas** | Solo 12 variables completas (60%) | **36 de 36 variables 100,00% completas (0 nulos)** |
+| **Volumen de Nulos** | > 1.300.000 celdas vacías (RUC 81% nulo) | **0 valores nulos en todo el universo** |
+| **Lote Crítico 2023** | Columnas corridas a la izquierda | **100% auténtico mediante cruce oficial PJUD** |
+| **Identificación de Causas** | RIT relativo con 41.439 errores `--` | **Clave única `ID_CAUSA_RIT` (280.795 causas)** |
+| **Consistencia Cronológica** | 22 inversiones de fecha | **100,00% coherencia temporal universal** |
+| **Tamaño y Rendimiento** | > 700 MB en JSON crudo | **10,77 MB en Parquet Snappy (carga en 0,13 s)** |
+
+---
+
+## 📁 Estructura del Repositorio
+
+```text
+CD-2026-Proyecto-EquipoEMCR/
 ├── data/
-│   ├── raw/           # JSON crudos extraídos de la API y parquet intermedio
-│   └── processed/     # Datasets consolidados y procesados
-├── notebooks/         # Cuadernos Jupyter para ETL y análisis exploratorio (EDA)
-├── reports/           # Informes técnicos detallados
-│   ├── 01_Ingesta_acotada.md
-│   └── 02_Auditoria_Calidad_Datos.md
+│   ├── raw/                           # Datos brutos extraídos de la API y fuentes oficiales PJUD
+│   │   ├── 05_muestras/               # JSONs crudos por año (2015–2025)
+│   │   ├── excel_pjud/                # Reportes consolidados oficiales (2023, 2025)
+│   │   └── parquet/                   # Parquet consolidado crudo original
+│   └── processed/                     # Datasets procesados y listos para consumo
+│       └── audiencias_preparadas_modelo.parquet   # ⭐ Artefacto final enriquecido (36 columnas, 0 nulos)
+├── notebooks/
+│   └── 01 ETL_audienciasparquet.ipynb # ⭐ Cuaderno interactivo de 7 fases ejecutado con NotebookClient
+├── reports/
+│   ├── 01_Ingesta_acotada.md          # Informe técnico de la extracción REST
+│   └── 02_Auditoria_Calidad_Datos.md  # ⭐ Informe técnico exhaustivo de auditoría y decisiones (Secciones 1 a 10)
 ├── src/
-│   ├── Api_Caller/    # Cliente de conexión y extracción hacia la API de PJUD
-│   └── App/           # Lógica modular y aplicaciones
-└── README.md
+│   ├── Api_Caller/                    # Conector hacia la API estadística del Poder Judicial
+│   └── App/                           # Plataforma interactiva Streamlit
+│       ├── Inicio.py                  # Portada y router de navegación multi-página
+│       └── pages/
+│           ├── 1.- Ingesta de Datos.py
+│           ├── 2.- Notebook ETL.py
+│           ├── 3.- Informe ETL.py
+│           └── 4.- Dashboard BI.py
+├── requirements.txt                   # Dependencias del proyecto
+└── README.md                          # Este archivo
 ```
 
 ---
 
-## Informes de Referencia
-Para consultar el detalle metodológico y los resultados de cada etapa:
-- [Informe Técnico de Ingesta Acotada](reports/01_Ingesta_acotada.md)
-- [Informe Técnico de Auditoría y Calidad de Datos](reports/02_Auditoria_Calidad_Datos.md)
+## 💻 Instalación y Despliegue Local
+
+### 1. Clonar el Repositorio y Configurar Entorno
+```bash
+git clone https://github.com/.../CD-2026-Proyecto-EquipoEMCR.git
+cd CD-2026-Proyecto-EquipoEMCR
+
+# Crear y activar entorno virtual (opcional pero recomendado)
+python -m venv .venv
+# En Windows:
+.venv\Scripts\activate
+# En Linux/macOS:
+source .venv/bin/activate
+```
+
+### 2. Instalar Dependencias
+```bash
+pip install -r requirements.txt
+```
+
+### 3. Ejecutar la Aplicación Web (Streamlit)
+```bash
+streamlit run src/App/Inicio.py
+```
+La aplicación se desplegará automáticamente en tu navegador en `http://localhost:8501`.
+
+---
+
+## 📑 Informes Técnicos de Referencia
+
+Para consultar el sustento normativo detallado (Ley 19.968, Ley 21.226, Ley 21.394), el diccionario de variables y la bitácora metodológica completa:
+* 📄 [`reports/01_Ingesta_acotada.md`](reports/01_Ingesta_acotada.md): Auditoría de la extracción REST vía API PJUD.
+* 📄 [`reports/02_Auditoria_Calidad_Datos.md`](reports/02_Auditoria_Calidad_Datos.md): Auditoría forense exhaustiva, fundamentos jurídicos, resolución del lote 2023, justificación de eliminación de `FECHA_FIRMA` y diccionario de las 36 variables preparadas.
