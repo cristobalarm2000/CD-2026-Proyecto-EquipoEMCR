@@ -38,11 +38,11 @@ def pagina_inicio():
     # Ficha técnica y métricas del MVP
     c1, c2, c3, c4 = st.columns(4)
     with c1:
-        st.metric("🏛️ Jurisdicción MVP", "Corte Valparaíso", "Código 30 (34 tribunales)")
+        st.metric("🏛️ Jurisdicción MVP", "Corte Valparaíso", "Código 30 (15 tribunales)")
     with c2:
         st.metric("📅 Horizonte Temporal", "2015 – 2025", "11 períodos anuales")
     with c3:
-        st.metric("📊 Audiencias Auditadas", "466,178 filas", "128,401 causas únicas")
+        st.metric("📊 Audiencias Auditadas", "466,178 filas", "280.795 causas únicas")
     with c4:
         st.metric("⚡ Compresión Parquet", "96.8% de ahorro", "238.9 MB → 7.71 MB")
 
@@ -76,6 +76,7 @@ def pagina_inicio():
     - **`2.- Notebook ETL`**: Publicación interactiva del cuaderno técnico [`01 ETL_audienciasparquet.ipynb`](notebooks) con el código ejecutable de las 7 fases de limpieza, imputación y persistencia.
     - **`3.- Informe ETL`**: Informe ejecutivo interactivo enfocado en los **hallazgos forenses y decisiones estratégicas** adoptadas durante el saneamiento del dataset.
     - **`4.- Dashboard BI`**: Tablero ejecutivo de Business Intelligence orientado a estudios jurídicos (gestión de plazos, SLAs, capacidad de salas, litigiosidad y productividad telemática).
+    - **`5.- EDA y Hallazgos`**: Análisis exploratorio interactivo de la **espera para una audiencia** (pregunta P1): distribución, comparación por tribunal, materia y época, evolución temporal y hallazgos para el estudio jurídico.
     """)
 
 # -----------------------------------------------------------------------------
@@ -86,9 +87,11 @@ pagina_ingesta = st.Page("pages/1.- Ingesta de Datos.py", title="1.- Ingesta de 
 pagina_notebook_etl = st.Page("pages/2.- Notebook ETL.py", title="2.- Notebook ETL", icon="📊")
 pagina_informe_etl = st.Page("pages/3.- Informe ETL.py", title="3.- Informe ETL", icon="📋")
 pagina_dashboard = st.Page("pages/4.- Dashboard BI.py", title="4.- Dashboard BI", icon="📈")
+pagina_eda = st.Page("pages/5.- EDA y Hallazgos.py", title="5.- EDA y Hallazgos", icon="🔍")
+
 
 pg = st.navigation({
-    "Menú Principal": [pagina_home, pagina_ingesta, pagina_notebook_etl, pagina_informe_etl, pagina_dashboard]
+    "Menú Principal": [pagina_home, pagina_ingesta, pagina_notebook_etl, pagina_informe_etl, pagina_dashboard, pagina_eda]
 })
 
 # -----------------------------------------------------------------------------
