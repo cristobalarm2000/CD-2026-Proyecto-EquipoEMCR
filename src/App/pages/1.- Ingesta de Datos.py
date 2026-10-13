@@ -39,7 +39,7 @@ for p in [CURRENT_DIR] + list(CURRENT_DIR.parents):
         BASE_DIR = p
         break
 if BASE_DIR is None:
-    BASE_DIR = Path(r"C:\Users\frero\CD-2026-Proyecto-EquipoEMCR")
+    BASE_DIR = Path(__file__).resolve().parents[2]
 
 # Configurar sys.path para importar desde src
 import sys

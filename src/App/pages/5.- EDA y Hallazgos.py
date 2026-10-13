@@ -349,8 +349,8 @@ def seccion_5_6(df):
     st.markdown(
         "- `DIAS_TRAMITACION_PREVIA` y `DIAS_DESPACHO_AGENDAMIENTO` se construyen con las mismas fechas que el "
         "plazo: son **fuga de información** y no deben entrar a un modelo que lo prediga.\n"
-        "- `VIDEOCONFERENCIA` y `ANO_AUDIENCIA` se parecen porque la modalidad remota solo existe desde 2020 "
-        "(antes se imputó `False`): relación en parte artificial.\n"
+        "- `VIDEOCONFERENCIA` y `ANO_AUDIENCIA` se parecen porque la modalidad remota solo se registra en la API desde 2021 "
+        "(el período 2015–2020 se imputó como `False`): relación en parte artificial.\n"
         "- Baja correlación lineal no implica ausencia de relación (puede ser no lineal o aparecer solo dentro de grupos)."
     )
 
@@ -401,10 +401,12 @@ def seccion_7(df):
         st.dataframe(por_epoca.round(1), **ANCHO)
         st.markdown(
             "**Las audiencias remotas esperan más que las presenciales.** Dos factores:\n"
-            "1. **Sesgo de composición (paradoja de Simpson):** el 38,6 % de las audiencias remotas son Juicios y "
-            "Continuaciones, frente a solo 18,0 % en las presenciales (donde predominan las Preparatorias breves, 56,7 %).\n"
+            "1. **Sesgo de composición (paradoja de Simpson):** la modalidad remota se concentra en audiencias complejas; "
+            "el 38,6 % son Juicios y Continuaciones (y 24,8 % Preparatorias). En la modalidad presencial dentro del mismo período con registro "
+            "(2021–2025), solo el 15,1 % son Juicios y Continuaciones y el 62,5 % son Preparatorias breves (18,0 % y 56,7 % en el histórico total).\n"
             "2. **Requisitos procesales bajo la Ley 21.394:** coordinación previa, verificación técnica y "
-            "«salas virtuales habilitadas» con cupos más acotados."
+            "«salas virtuales habilitadas» con cupos más acotados.\n\n"
+            "*(Nota metodológica: para 2015–2020 la API no registró este campo y se imputó presencial; bajo la Ley 21.226 las audiencias de 2020 quedaron imputadas en presencial).*"
         )
 
 
@@ -434,10 +436,10 @@ def seccion_8(df):
                         **ANCHO)
 
     st.info(
-        "**Hallazgos de negocio inmediatos**\n\n"
+        "**Hallazgos de negocio inmediatos** (medianas, período 2015–2025)\n\n"
         "- **Cuello de botella en juicio:** mientras en Limache o Los Andes una audiencia de juicio se agenda en ~31 días, "
         "en **Casablanca (62)** y **Viña del Mar (56)** el plazo se duplica.\n"
-        "- **Lentitud en La Ligua y Quintero:** en preparatorias, La Ligua (39) y Quintero (42) cuadruplican a "
+        "- **Lentitud en La Ligua y Quintero:** en preparatorias, La Ligua (39) y Quintero (42) triplican a "
         "Limache (13) e Isla de Pascua (13).\n"
         "- **Duración en sala:** las continuaciones de juicio en **Limache (65 min)** y **Quillota (57)** duran el doble "
         "que en **Quintero (25)** o **Viña del Mar (31)**; útil para planificar agendas y horas facturables."
@@ -512,9 +514,10 @@ def seccion_11(df):
 
     with st.container(border=True):
         st.markdown("**1 · Brecha de eficiencia territorial.** El tribunal donde ingresa la causa determina de forma "
-                    "decisiva la espera: hay una brecha de casi 3x entre el más ágil y el más lento.")
-        st.markdown("*Evidencia:* Familia Quilpué y Limache tienen medianas de 13 a 15 días; Familia La Ligua y "
-                    "Quintero, de 37 a 42 días en preparatorias (secciones 7 y 8).")
+                    "decisiva la espera: hay una brecha de 2,5x en la mediana general entre el más ágil y el más lento, "
+                    "que llega a 3x en audiencias preparatorias.")
+        st.markdown("*Evidencia:* en preparatorias, Familia Limache y Quilpué tienen medianas de 13 a 15 días; Familia La Ligua y "
+                    "Quintero, de 39 a 42 días (secciones 7 y 8).")
         st.markdown("*Acción:* ajustar la promesa de plazos al cliente según la jurisdicción y priorizar solicitudes "
                     "de agilización en juzgados congestionados.")
         with st.expander("Interpretación"):

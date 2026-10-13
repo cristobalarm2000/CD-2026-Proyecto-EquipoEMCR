@@ -29,7 +29,7 @@ for p in [CURRENT_DIR] + list(CURRENT_DIR.parents):
         BASE_DIR = p
         break
 if BASE_DIR is None:
-    BASE_DIR = Path(r"C:\Users\frero\CD-2026-Proyecto-EquipoEMCR")
+    BASE_DIR = Path(__file__).resolve().parents[2]
 
 PARQUET_PATH = BASE_DIR / "data" / "raw" / "parquet" / "audiencias_realizadas_competencia_detalle.parquet"
 
@@ -358,9 +358,7 @@ def aplicar_transformaciones_etl(df_in):
         return s.strip().upper()
 
     # 3.1 Tratamiento 2023 mediante Fuente Oficial PJUD (Opción A)
-    path_csv = Path("data/raw/excel_pjud/audiencias_realizadas_2023.csv")
-    if not path_csv.exists():
-        path_csv = Path(r"C:\Users\frero\CD-2026-Proyecto-EquipoEMCR\data\raw\excel_pjud\audiencias_realizadas_2023.csv")
+    path_csv = BASE_DIR / "data" / "raw" / "excel_pjud" / "audiencias_realizadas_2023.csv"
     
     if path_csv.exists():
         df_csv = pd.read_csv(
@@ -585,7 +583,7 @@ st.markdown("""
 Estandarización de los 6 formatos heterogéneos (`'SI'`, `'NO'`, `'1.0'`, `'0.0'`, `'1,0'`, `'0,0'`) a tipado booleano estricto (`True` = Telemática / Remota, `False` = Presencial).
 
 **Criterio metodológico sobre valores ausentes pre-2020:**
-Los 248.137 registros con valor nulo corresponden en su totalidad al período 2015 hasta noviembre de 2020. Debido a que las audiencias telemáticas fueron habilitadas por primera vez en el Poder Judicial chileno mediante la Ley 21.226 (publicada en abril de 2020 e implementada progresivamente en tribunales de familia hacia finales de ese año), las audiencias de dicho período histórico fueron presenciales por definición jurídica y operativa. En consecuencia, se imputan con `False` (Presencial), alcanzando un 100% de integridad en la variable.
+Los 248.137 registros con valor nulo corresponden en su totalidad al período 2015–2020 completo (la API estadística del PJUD comenzó a poblar este campo a partir del lote 2021). Debido a que las audiencias telemáticas fueron habilitadas por primera vez en el Poder Judicial chileno mediante la Ley 21.226 (publicada en abril de 2020 e implementada progresivamente en tribunales de familia hacia finales de ese año), las audiencias del período histórico ordinario (2015–2019) fueron presenciales por definición normativa, y durante 2020 el sistema estadístico aún no desagregaba la variable en la API. En consecuencia, se imputan con `False` (Presencial), alcanzando un 100% de integridad en la variable.
 """)
 
 st.code("""map_video = {

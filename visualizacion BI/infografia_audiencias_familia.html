@@ -73,11 +73,11 @@ svg .num{font-family:var(--f-mono);fill:var(--ink);font-size:11px}
 <header>
   <span class="eyebrow">PJUD · Familia · C.A. Valparaíso · 2015–2025</span>
   <h1>¿Cuánto tarda realmente una audiencia de Familia?</h1>
-  <p class="lead">466.178 audiencias de 34 tribunales muestran que la espera para ser atendido cambia mucho según el año, el tribunal y la modalidad. Hoy los estudios jurídicos no tienen cómo medirla. Estos datos permiten hacerlo.</p>
+  <p class="lead">466.178 audiencias de 15 tribunales con competencia en Familia muestran que la espera para ser atendido cambia mucho según el año, el tribunal y la modalidad. Hoy los estudios jurídicos no tienen cómo medirla. Estos datos permiten hacerlo.</p>
   <div class="hero-stats">
     <div><b>466 mil</b><span>audiencias analizadas</span></div>
     <div><b>26 días</b><span>espera mediana (programación a audiencia)</span></div>
-    <div><b>18 a 74</b><span>días de espera mediana según tribunal</span></div>
+    <div><b>18 a 75</b><span>días de espera mediana según tribunal (2022–2025)</span></div>
   </div>
 </header>
 
@@ -109,7 +109,8 @@ svg .num{font-family:var(--f-mono);fill:var(--ink);font-size:11px}
       <div class="txt">
         <span class="tag">Gráfico 2 · Por tribunal (2022–2025)</span>
         <h3>El mismo trámite espera 4 veces más en otro tribunal</h3>
-        <p>Limache y Quilpué esperan 18 y 19 días. Viña del Mar, el tribunal con más audiencias, espera 50. Quintero llega a 74.</p>
+        <p>Limache y Quilpué esperan 18 y 19 días. Viña del Mar, el tribunal con más audiencias, espera 50. Quintero llega a 75.</p>
+        <p style="font-size:.8rem;color:var(--muted)">Todas las audiencias, 2022–2025. Se omiten Petorca, Putaendo e Isla de Pascua (&lt; 2.000 audiencias en el período).</p>
         <p class="use">Sirve para: comparar tribunales y estimar la fecha de una causa según dónde se tramita.</p>
       </div>
     </article>
@@ -186,7 +187,7 @@ const A=[[2015,19,10,29],[2016,21,10,30],[2017,23,11,33],[2018,24,12,34],[2019,2
 })();
 
 // Gráfico 2: tribunales
-const Tr=[['Quintero',74,90],['La Ligua',72,84],['Viña del Mar',50,64],['San Antonio',40,47],['Quillota',33,63],['Villa Alemana',32,46],['Casablanca',31,59],['San Felipe',31,56],['Los Andes',28,41],['Valparaíso',25,56],['Quilpué',19,35],['Limache',18,33]];
+const Tr=[['Quintero',75,93],['La Ligua',72,84],['Viña del Mar',50,64],['San Antonio',40,47],['Quillota',33,63],['Villa Alemana',32,46],['Casablanca',31,59],['San Felipe',31,56],['Los Andes',28,41],['Valparaíso',25,56],['Quilpué',19,35],['Limache',18,33]];
 (function(){const s=document.getElementById('c2'),L=96,R=500,T=6,rh=25,max=100,x=v=>L+(R-L)*v/max;
   [0,25,50,75,100].forEach(v=>{el(s,'line',{x1:x(v),x2:x(v),y1:T,y2:T+rh*Tr.length,stroke:'var(--grid)'});el(s,'text',{x:x(v),y:T+rh*Tr.length+14,'text-anchor':'middle'},v)});
   el(s,'text',{x:R,y:T+rh*Tr.length+30,'text-anchor':'end'},'Días de espera. Claro: P75, oscuro: mediana');

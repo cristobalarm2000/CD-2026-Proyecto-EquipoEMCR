@@ -53,7 +53,7 @@ def pagina_inicio():
         st.info("""
         #### 🧪 Alcance Actual: Validación en Familia
         - **Entidad:** `audiencias_realizadas_competencia_detalle`.
-        - **Cobertura Territorial:** 34 juzgados con competencia de Familia en la V Región (Viña del Mar, Valparaíso, Quillota, etc.).
+        - **Cobertura Territorial:** 15 tribunales con competencia de Familia en la jurisdicción de Valparaíso (Viña del Mar, Valparaíso, Quillota, etc.).
         - **Pipeline Validado:** Ingesta REST con política de reintentos, tipado fuerte (`Int64`, `datetime64[ns]`) y detección forense de inconsistencias.
         - **Integridad Verificada:** 0 duplicados exactos (0,0%) y 12 variables con 100% de exhaustividad.
         """)

@@ -6,3 +6,4 @@ __pycache__/
 *.xlsx
 !src/Api_Caller/*.csv
 
+data/
