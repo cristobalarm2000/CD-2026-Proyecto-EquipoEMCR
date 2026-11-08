@@ -7,3 +7,4 @@ __pycache__/
 !src/Api_Caller/*.csv
 
 data/
+catboost_info/

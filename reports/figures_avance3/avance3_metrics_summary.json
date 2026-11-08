@@ -1,0 +1,626 @@
+{
+  "dataset_total_rows": 466178,
+  "dataset_total_cases": 280795,
+  "train_recent_rows": 130057,
+  "train_recent_prev": 0.23432802540424583,
+  "test_rows": 83410,
+  "test_prev": 0.15585661191703631,
+  "train_full_rows": 379745,
+  "train_full_prev": 0.10773018736257226,
+  "operational_threshold": 0.35,
+  "features": [
+    "TRIBUNAL_CORTO",
+    "TIPO_AUDIENCIA",
+    "TIPO_PROCEDIMIENTO",
+    "MACRO_MATERIA",
+    "VIDEOCONFERENCIA_INT",
+    "ORDEN_AUDIENCIA_CAUSA",
+    "MES_PROG",
+    "DIA_SEM_PROG"
+  ],
+  "cv_results": {
+    "Dummy Basal": {
+      "ROC_AUC_mean": 0.5,
+      "ROC_AUC_std": 0.0,
+      "AP_mean": 0.23432802531000782,
+      "AP_std": 1.469816099393277e-05,
+      "Recall_mean": 0.0,
+      "Recall_std": 0.0,
+      "Precision_mean": 0.0,
+      "Precision_std": 0.0,
+      "F1_mean": 0.0,
+      "F1_std": 0.0,
+      "Acc_mean": 0.7656719746899923,
+      "Acc_std": 1.469816099392738e-05,
+      "AP_folds": [
+        0.2343149315700446,
+        0.23435337536521605,
+        0.23432393987159278,
+        0.23432393987159278,
+        0.23432393987159278
+      ],
+      "ROC_AUC_folds": [
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5
+      ]
+    },
+    "Regresión Logística": {
+      "ROC_AUC_mean": 0.8286174095494026,
+      "ROC_AUC_std": 0.003497135414065535,
+      "AP_mean": 0.5775191212739889,
+      "AP_std": 0.004777324863818294,
+      "Recall_mean": 0.3747210182607404,
+      "Recall_std": 0.008119985028273168,
+      "Precision_mean": 0.6395261851907948,
+      "Precision_std": 0.007614322913610788,
+      "F1_mean": 0.4725010016217229,
+      "F1_std": 0.006826092357887093,
+      "Acc_mean": 0.8039705406694797,
+      "Acc_std": 0.0018317264587667387,
+      "AP_folds": [
+        0.5768519338447539,
+        0.5857354809142732,
+        0.5748639152164993,
+        0.5765404799574577,
+        0.5736037964369604
+      ],
+      "ROC_AUC_folds": [
+        0.8294600813227232,
+        0.8343305457396131,
+        0.8269546451124254,
+        0.8255251012414568,
+        0.8268166743307946
+      ]
+    },
+    "Random Forest": {
+      "ROC_AUC_mean": 0.8705385670639529,
+      "ROC_AUC_std": 0.002443404275265387,
+      "AP_mean": 0.6658764824177987,
+      "AP_std": 0.003683011620570421,
+      "Recall_mean": 0.365894283210497,
+      "Recall_std": 0.013360361914781134,
+      "Precision_mean": 0.737743270132204,
+      "Precision_std": 0.007995530605906364,
+      "F1_mean": 0.48898452334350095,
+      "F1_std": 0.010197437873353941,
+      "Acc_mean": 0.8208862347258151,
+      "Acc_std": 0.0008780096395997719,
+      "AP_folds": [
+        0.6636035021185805,
+        0.6721224652221915,
+        0.666212137061056,
+        0.6643072309772653,
+        0.6631370767099004
+      ],
+      "ROC_AUC_folds": [
+        0.8722081132186679,
+        0.8740180707791623,
+        0.868933145132444,
+        0.8685112748358529,
+        0.8690222313536378
+      ]
+    },
+    "XGBoost": {
+      "ROC_AUC_mean": 0.8828945797645009,
+      "ROC_AUC_std": 0.002023142922684959,
+      "AP_mean": 0.6856883788808465,
+      "AP_std": 0.004001434135368156,
+      "Recall_mean": 0.5069559457754409,
+      "Recall_std": 0.008992013730428376,
+      "Precision_mean": 0.6948926845996821,
+      "Precision_std": 0.006339630208178719,
+      "F1_mean": 0.5861605453414654,
+      "F1_std": 0.004870649613632176,
+      "Acc_mean": 0.8322812141609639,
+      "Acc_std": 0.0011976161504833709,
+      "AP_folds": [
+        0.6828524256293024,
+        0.6924926445616663,
+        0.6851864674555972,
+        0.6826426702418147,
+        0.6852676865158529
+      ],
+      "ROC_AUC_folds": [
+        0.8839281129896619,
+        0.8859171734869127,
+        0.8815387630509172,
+        0.8809595790424788,
+        0.882129270252534
+      ]
+    },
+    "CatBoost": {
+      "ROC_AUC_mean": 0.8834134662740233,
+      "ROC_AUC_std": 0.0022541238410213778,
+      "AP_mean": 0.6860151720631272,
+      "AP_std": 0.005484658944296462,
+      "Recall_mean": 0.5093513841430198,
+      "Recall_std": 0.007123095761912459,
+      "Precision_mean": 0.6953172444374887,
+      "Precision_std": 0.00567979528235404,
+      "F1_mean": 0.5879407082621787,
+      "F1_std": 0.004435103370663192,
+      "Acc_mean": 0.8327117973775311,
+      "Acc_std": 0.00137443435637991,
+      "AP_folds": [
+        0.6819771082534762,
+        0.6956030903896911,
+        0.6851360204209023,
+        0.6841332285500057,
+        0.6832264127015608
+      ],
+      "ROC_AUC_folds": [
+        0.8835455614961236,
+        0.8872378037956267,
+        0.8825609191088214,
+        0.8815994156589753,
+        0.8821236313105691
+      ]
+    }
+  },
+  "test_results": {
+    "Dummy Basal": {
+      "train_roc_auc": 0.5,
+      "train_ap": 0.23432802540424583,
+      "train_acc_50": 0.7656719745957542,
+      "train_f1_50": 0.0,
+      "test_roc_auc": 0.5,
+      "test_ap": 0.15585661191703631,
+      "test_acc_50": 0.8441433880829636,
+      "test_prec_50": 0.0,
+      "test_rec_50": 0.0,
+      "test_f1_50": 0.0,
+      "test_acc_35": 0.8441433880829636,
+      "test_prec_35": 0.0,
+      "test_rec_35": 0.0,
+      "test_f1_35": 0.0,
+      "cm_50": [
+        [
+          70410,
+          0
+        ],
+        [
+          13000,
+          0
+        ]
+      ],
+      "cm_35": [
+        [
+          70410,
+          0
+        ],
+        [
+          13000,
+          0
+        ]
+      ]
+    },
+    "Regresión Logística": {
+      "train_roc_auc": 0.8290379976983466,
+      "train_ap": 0.5779108739646975,
+      "train_acc_50": 0.8044088361256987,
+      "train_f1_50": 0.47387797311271973,
+      "test_roc_auc": 0.826540515442518,
+      "test_ap": 0.44925302468714756,
+      "test_acc_50": 0.8371897853974344,
+      "test_prec_50": 0.47125867195242815,
+      "test_rec_50": 0.3657692307692308,
+      "test_f1_50": 0.4118666089216111,
+      "test_acc_35": 0.81763577508692,
+      "test_prec_35": 0.43532440180190723,
+      "test_rec_35": 0.5723846153846154,
+      "test_f1_35": 0.4945336124680158,
+      "cm_50": [
+        [
+          65075,
+          5335
+        ],
+        [
+          8245,
+          4755
+        ]
+      ],
+      "cm_35": [
+        [
+          60758,
+          9652
+        ],
+        [
+          5559,
+          7441
+        ]
+      ]
+    },
+    "Random Forest": {
+      "train_roc_auc": 0.8737741653343232,
+      "train_ap": 0.6741884875527798,
+      "train_acc_50": 0.8231237072975696,
+      "train_f1_50": 0.49590217820046456,
+      "test_roc_auc": 0.8517985212983296,
+      "test_ap": 0.4794773974844414,
+      "test_acc_50": 0.8540702553650641,
+      "test_prec_50": 0.5477949665204341,
+      "test_rec_50": 0.365,
+      "test_f1_50": 0.43809435878496905,
+      "test_acc_35": 0.8065339887303681,
+      "test_prec_35": 0.4167595393514833,
+      "test_rec_35": 0.6040769230769231,
+      "test_f1_35": 0.4932324215683196,
+      "cm_50": [
+        [
+          66493,
+          3917
+        ],
+        [
+          8255,
+          4745
+        ]
+      ],
+      "cm_35": [
+        [
+          59420,
+          10990
+        ],
+        [
+          5147,
+          7853
+        ]
+      ]
+    },
+    "XGBoost": {
+      "train_roc_auc": 0.8893671449510738,
+      "train_ap": 0.7013986913743515,
+      "train_acc_50": 0.8365409012971236,
+      "train_f1_50": 0.5984397725770197,
+      "test_roc_auc": 0.8604722548152033,
+      "test_ap": 0.484305475227337,
+      "test_acc_50": 0.8460496343364104,
+      "test_prec_50": 0.5064534458965825,
+      "test_rec_50": 0.4799230769230769,
+      "test_f1_50": 0.4928314704372211,
+      "test_acc_35": 0.7949166766574751,
+      "test_prec_35": 0.4052257409288154,
+      "test_rec_35": 0.6752307692307692,
+      "test_f1_35": 0.506491258438636,
+      "cm_50": [
+        [
+          64330,
+          6080
+        ],
+        [
+          6761,
+          6239
+        ]
+      ],
+      "cm_35": [
+        [
+          57526,
+          12884
+        ],
+        [
+          4222,
+          8778
+        ]
+      ]
+    },
+    "CatBoost": {
+      "train_roc_auc": 0.8880377311912105,
+      "train_ap": 0.6966344655017901,
+      "train_acc_50": 0.835687429357897,
+      "train_f1_50": 0.595418402120409,
+      "test_roc_auc": 0.8607778183824414,
+      "test_ap": 0.48009220413680626,
+      "test_acc_50": 0.8467689725452584,
+      "test_prec_50": 0.5089133089133089,
+      "test_rec_50": 0.4809230769230769,
+      "test_f1_50": 0.49452244413684004,
+      "test_acc_35": 0.7949166766574751,
+      "test_prec_35": 0.40483033562024845,
+      "test_rec_35": 0.6717692307692308,
+      "test_f1_35": 0.505206525511975,
+      "cm_50": [
+        [
+          64377,
+          6033
+        ],
+        [
+          6748,
+          6252
+        ]
+      ],
+      "cm_35": [
+        [
+          57571,
+          12839
+        ],
+        [
+          4267,
+          8733
+        ]
+      ]
+    }
+  },
+  "regime_sensitivity": {
+    "Regresión Logística": {
+      "hist_test_roc_auc": 0.760541131067484,
+      "hist_test_ap": 0.3336188418727159,
+      "hist_test_rec_50": 0.09576923076923077,
+      "hist_test_f1_50": 0.15339124006653115,
+      "recent_test_roc_auc": 0.826540515442518,
+      "recent_test_ap": 0.44925302468714756,
+      "recent_test_rec_50": 0.3657692307692308,
+      "recent_test_f1_50": 0.4118666089216111
+    },
+    "Random Forest": {
+      "hist_test_roc_auc": 0.7903703008750942,
+      "hist_test_ap": 0.3594620322213899,
+      "hist_test_rec_50": 0.0896923076923077,
+      "hist_test_f1_50": 0.150714147224197,
+      "recent_test_roc_auc": 0.8517985212983296,
+      "recent_test_ap": 0.4794773974844414,
+      "recent_test_rec_50": 0.365,
+      "recent_test_f1_50": 0.43809435878496905
+    },
+    "XGBoost": {
+      "hist_test_roc_auc": 0.8044977658330874,
+      "hist_test_ap": 0.3677045129050407,
+      "hist_test_rec_50": 0.16376923076923078,
+      "hist_test_f1_50": 0.2343165309267004,
+      "recent_test_roc_auc": 0.8604722548152033,
+      "recent_test_ap": 0.484305475227337,
+      "recent_test_rec_50": 0.4799230769230769,
+      "recent_test_f1_50": 0.4928314704372211
+    }
+  },
+  "bootstrap_summary": {
+    "B": 500,
+    "omitted": 0,
+    "XGBoost_AP_point": 0.484305475227337,
+    "XGBoost_AP_ci95": [
+      0.4751909851028089,
+      0.49282491660879924
+    ],
+    "RandomForest_AP_point": 0.4794773974844414,
+    "RandomForest_AP_ci95": [
+      0.4703628334942758,
+      0.48933384373747985
+    ],
+    "LogReg_AP_point": 0.44925302468714756,
+    "LogReg_AP_ci95": [
+      0.44016357549530555,
+      0.45868223144675796
+    ],
+    "Diff_XGB_LR_point": 0.03505245054018946,
+    "Diff_XGB_LR_ci95": [
+      0.028883341554078762,
+      0.04177697047535943
+    ],
+    "Diff_RF_LR_point": 0.03022437279729384,
+    "Diff_RF_LR_ci95": [
+      0.023959907353080644,
+      0.036925303162705245
+    ]
+  },
+  "top_shap_features": [
+    {
+      "feature": "Procedimiento: CONTENCIOSA",
+      "mean_abs_shap": 0.5160666704177856
+    },
+    {
+      "feature": "Audiencia: AUDIENCIA DE JUICIO",
+      "mean_abs_shap": 0.4301319420337677
+    },
+    {
+      "feature": "N° Orden Audiencia en Causa",
+      "mean_abs_shap": 0.2653715908527374
+    },
+    {
+      "feature": "Mes de Programación (1-12)",
+      "mean_abs_shap": 0.25820571184158325
+    },
+    {
+      "feature": "Modalidad: Videoconferencia",
+      "mean_abs_shap": 0.20412684977054596
+    },
+    {
+      "feature": "Tribunal: J.F. La Ligua",
+      "mean_abs_shap": 0.19375774264335632
+    },
+    {
+      "feature": "Audiencia: INMEDIATA",
+      "mean_abs_shap": 0.1793295443058014
+    },
+    {
+      "feature": "Tribunal: J.F. Viña del Mar",
+      "mean_abs_shap": 0.1725659817457199
+    },
+    {
+      "feature": "Tribunal: J.F. San Antonio",
+      "mean_abs_shap": 0.14756400883197784
+    },
+    {
+      "feature": "Tribunal: J.F. Los Andes",
+      "mean_abs_shap": 0.1432020515203476
+    },
+    {
+      "feature": "Audiencia: AUDIENCIA PREPARATORIA",
+      "mean_abs_shap": 0.14199891686439514
+    },
+    {
+      "feature": "Tribunal: J.F. Quillota",
+      "mean_abs_shap": 0.1342904418706894
+    },
+    {
+      "feature": "Tribunal: J.L.G. Quintero",
+      "mean_abs_shap": 0.1300400197505951
+    },
+    {
+      "feature": "Tribunal: J.F. Limache",
+      "mean_abs_shap": 0.12590135633945465
+    },
+    {
+      "feature": "Materia: Medidas Cautelares y Vulnerabilidad",
+      "mean_abs_shap": 0.10706380754709244
+    }
+  ],
+  "local_cases": {
+    "Caso_1_VP_Acierto_Severo": {
+      "sample_pos": 1572,
+      "test_index": 359654,
+      "ID_CAUSA_RIT": "1271-C-1836-2024",
+      "TRIBUNAL": "JUZGADO DE FAMILIA DE VINA DEL MAR",
+      "TIPO_AUDIENCIA": "AUDIENCIA DE JUICIO",
+      "TIPO_PROCEDIMIENTO": "CONTENCIOSA",
+      "MACRO_MATERIA": "Litigación Contenciosa",
+      "VIDEOCONFERENCIA": false,
+      "ORDEN_AUDIENCIA_CAUSA": 2,
+      "FECHA_PROGRAMACION": "2024-12-12",
+      "FECHA_AUDIENCIA": "2025-04-08",
+      "PLAZO_REAL_DIAS": 98,
+      "Y_REAL": 1,
+      "PROBA_XGB": 0.8703956007957458,
+      "PROBA_RF": 0.6528932863743477,
+      "PROBA_LR": 0.7733114125682967,
+      "BASE_VALUE_LOGODDS": -1.2090091705322266,
+      "FX_LOGODDS": 1.9044604301452637,
+      "TOP_CONTRIBUTIONS": [
+        {
+          "feature": "Audiencia: AUDIENCIA DE JUICIO",
+          "value": 1.0,
+          "shap_logodds": 0.9397121667861938
+        },
+        {
+          "feature": "Mes de Programación (1-12)",
+          "value": 12.0,
+          "shap_logodds": 0.9187132716178894
+        },
+        {
+          "feature": "Tribunal: J.F. Viña del Mar",
+          "value": 1.0,
+          "shap_logodds": 0.8295708894729614
+        },
+        {
+          "feature": "Modalidad: Videoconferencia",
+          "value": 0.0,
+          "shap_logodds": -0.2909562289714813
+        },
+        {
+          "feature": "Procedimiento: CONTENCIOSA",
+          "value": 1.0,
+          "shap_logodds": 0.2540765106678009
+        },
+        {
+          "feature": "N° Orden Audiencia en Causa",
+          "value": 2.0,
+          "shap_logodds": 0.224964901804924
+        }
+      ]
+    },
+    "Caso_2_VN_Acierto_Rapido": {
+      "sample_pos": 966,
+      "test_index": 228331,
+      "ID_CAUSA_RIT": "1268-P-931-2025",
+      "TRIBUNAL": "JUZGADO DE FAMILIA DE SAN FELIPE",
+      "TIPO_AUDIENCIA": "INMEDIATA",
+      "TIPO_PROCEDIMIENTO": "MEDIDAS DE PROTECCION",
+      "MACRO_MATERIA": "Medidas Cautelares y Vulnerabilidad",
+      "VIDEOCONFERENCIA": false,
+      "ORDEN_AUDIENCIA_CAUSA": 1,
+      "FECHA_PROGRAMACION": "2025-07-30",
+      "FECHA_AUDIENCIA": "2025-07-30",
+      "PLAZO_REAL_DIAS": 0,
+      "Y_REAL": 0,
+      "PROBA_XGB": 0.00014212349196895957,
+      "PROBA_RF": 0.03618262736580933,
+      "PROBA_LR": 0.0026778015839452017,
+      "BASE_VALUE_LOGODDS": -1.2090091705322266,
+      "FX_LOGODDS": -8.858673095703125,
+      "TOP_CONTRIBUTIONS": [
+        {
+          "feature": "Audiencia: INMEDIATA",
+          "value": 1.0,
+          "shap_logodds": -4.876084327697754
+        },
+        {
+          "feature": "Procedimiento: CONTENCIOSA",
+          "value": 0.0,
+          "shap_logodds": -0.9051999449729919
+        },
+        {
+          "feature": "Audiencia: AUDIENCIA DE JUICIO",
+          "value": 0.0,
+          "shap_logodds": -0.35167327523231506
+        },
+        {
+          "feature": "Tribunal: J.F. San Felipe",
+          "value": 1.0,
+          "shap_logodds": -0.34710443019866943
+        },
+        {
+          "feature": "N° Orden Audiencia en Causa",
+          "value": 1.0,
+          "shap_logodds": -0.3291383981704712
+        },
+        {
+          "feature": "Materia: Medidas Cautelares y Vulnerabilidad",
+          "value": 1.0,
+          "shap_logodds": -0.2804279923439026
+        }
+      ]
+    },
+    "Caso_3_FN_Error_Critico": {
+      "sample_pos": 376,
+      "test_index": 85182,
+      "ID_CAUSA_RIT": "1264-F-416-2023",
+      "TRIBUNAL": "JUZGADO DE FAMILIA DE LOS ANDES",
+      "TIPO_AUDIENCIA": "AUDIENCIA",
+      "TIPO_PROCEDIMIENTO": "VIOLENCIA INTRAFAMILIAR",
+      "MACRO_MATERIA": "Medidas Cautelares y Vulnerabilidad",
+      "VIDEOCONFERENCIA": false,
+      "ORDEN_AUDIENCIA_CAUSA": 4,
+      "FECHA_PROGRAMACION": "2024-02-23",
+      "FECHA_AUDIENCIA": "2024-06-13",
+      "PLAZO_REAL_DIAS": 91,
+      "Y_REAL": 1,
+      "PROBA_XGB": 0.12049060314893723,
+      "PROBA_RF": 0.14501350702783775,
+      "PROBA_LR": 0.048626901298575824,
+      "BASE_VALUE_LOGODDS": -1.2090091705322266,
+      "FX_LOGODDS": -1.98779296875,
+      "TOP_CONTRIBUTIONS": [
+        {
+          "feature": "N° Orden Audiencia en Causa",
+          "value": 4.0,
+          "shap_logodds": 1.0150506496429443
+        },
+        {
+          "feature": "Tribunal: J.F. Los Andes",
+          "value": 1.0,
+          "shap_logodds": -0.6432676911354065
+        },
+        {
+          "feature": "Procedimiento: CONTENCIOSA",
+          "value": 0.0,
+          "shap_logodds": -0.34141451120376587
+        },
+        {
+          "feature": "Audiencia: AUDIENCIA DE JUICIO",
+          "value": 0.0,
+          "shap_logodds": -0.2772204875946045
+        },
+        {
+          "feature": "Mes de Programación (1-12)",
+          "value": 2.0,
+          "shap_logodds": -0.2693083882331848
+        },
+        {
+          "feature": "Audiencia: AUDIENCIA PREPARATORIA",
+          "value": 0.0,
+          "shap_logodds": 0.17149296402931213
+        }
+      ]
+    }
+  }
+}
