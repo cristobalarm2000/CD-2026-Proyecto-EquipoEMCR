@@ -118,7 +118,7 @@ with st.sidebar:
     if MD_REPORT_PATH.exists():
         with open(MD_REPORT_PATH, "rb") as f_md:
             st.download_button(
-                label="📄 Descargar Informe y Guion (.md)",
+                label="📄 Descargar Informe (.md)",
                 data=f_md.read(),
                 file_name="06_Avance_3_Modelado_y_XAI_Justificacion.md",
                 mime="text/markdown",
@@ -149,7 +149,6 @@ SECCIONES = [
     "3 · Curvas ROC/PR, Umbral & Bootstrap",
     "4 · Explicabilidad Global y Local (SHAP)",
     "5 · Simulador LegalTech con SHAP en Vivo",
-    "6 · Guion de Defensa (7 min) & Rúbrica",
 ]
 
 seccion = st.radio("Navegación Avance 3", SECCIONES, horizontal=True, label_visibility="collapsed")
@@ -494,57 +493,4 @@ elif seccion == SECCIONES[4]:
                 f"1. **Plazo Esperado:** La mediana histórica en `{trib_sel}` para `{aud_sel}` es de **{mediana_emp} días hábiles** (P75 = **{p75_emp} días**).\n"
                 "2. **Estrategia de Sala:** Priorizar notificación rápida y tener minuta de conciliación/prueba lista en el corto plazo.\n"
                 "3. **Advertencia Forense (Caso Local 3):** Si el juez ordena peritajes externos (SML/DAM), el plazo real puede saltar sobre 75 días pese al bajo riesgo basal."
-            )
-
-# =============================================================================
-# SECCIÓN 6: GUION DE DEFENSA CRONOMETRADO (7 MIN) Y RÚBRICA DE 100 PUNTOS
-# =============================================================================
-elif seccion == SECCIONES[5]:
-    st.markdown("#### 🎤 Guion Cronometrado de Exposición (7 Minutos + 3 Minutos de Preguntas)")
-    col_g1, col_g2 = st.columns(2)
-    with col_g1:
-        st.info(
-            "**⏱️ Minutos 0:00 a 3:30 (Láminas 1 a 4 — Problema, Datos, Validación y Métricas):**\n"
-            "- **0:00–0:45 (Lámina 1):** Dolor económico y procesal en Familia (Ley 19.968 exige 30 días hábiles, pero la cola llega a 339 días). Pregunta predictiva en $T = \\text{FECHA\\_PROGRAMACION}$: predecir si la espera superará **60 días hábiles** ($y=1$).\n"
-            "- **0:45–1:30 (Lámina 2):** 466.178 audiencias PJUD (15 juzgados), 8 predictores sin fuga de futuro y los 2 hallazgos visuales del EDA: cambio de régimen post-2020 y dominio de `TIPO_AUDIENCIA` ($\\eta^2 = 10,9\\%$). \n"
-            "- **1:30–2:20 (Lámina 3):** Flujo Taller 5 y 6 con `Pipeline` (`OneHotEncoder` + `StandardScaler` ajustado solo en `train`), `StratifiedKFold` (5 folds) en el régimen vigente (`2021–2023`) y demostración de por qué entrenar con `2015–2023` hunde el Recall.\n"
-            "- **2:20–3:30 (Lámina 4):** Trampa del `Accuracy` ($84,4\\%$ en `Dummy` con Recall $0\\%$), control de sobreajuste entre Train y Test, y salto de `XGBoost` ($AP = 0,484$, **3,1x sobre el azar**)."
-        )
-    with col_g2:
-        st.success(
-            "**⏱️ Minutos 3:30 a 7:00 (Láminas 5 a 10 — Curvas, Bootstrap, SHAP y Conclusión):**\n"
-            "- **3:30–4:30 (Láminas 5 y 6):** Curvas ROC y PR con línea de prevalencia ($15,6\\%$), ajuste del umbral de $0,50$ a $0,35$ por alto costo jurídico del Falso Negativo (subiendo Recall de $48,6\\%$ a **$67,9\\%$**), e intervalo bootstrap 95% de $\\Delta\\text{AP}$ (`[+0,029, +0,042]`).\n"
-            "- **4:30–5:20 (Lámina 7):** Explicabilidad Global `shap.plots.beeswarm` en escala `log-odds` ($n=2.000$ de Test): coherencia con EDA y principio de **no causalidad**.\n"
-            "- **5:20–6:20 (Láminas 8 y 9):** Contraste de los 3 casos locales con `shap.plots.waterfall`: Caso 1 (VP: Juicio en Viña del Mar, 98d, $\\hat{p}=87\\%$), Caso 2 (VN: Inmediata en San Felipe, 0d, $\\hat{p}=0\\%$) y Caso 3 (FN: VIF en Los Andes, 91d reales con $\\hat{p}=12\\%$ por peritajes externos no observables).\n"
-            "- **6:20–7:00 (Lámina 10):** Recomendación de `XGBoost` (umbral $0,35$), limitación de variables periciales latentes y mejora con *rolling backlog* 30d + Jurimetría PJUD."
-        )
-
-    st.markdown("---")
-    st.markdown("#### 🛡️ Respuestas Directas a las 4 Preguntas de Defensa del Profesor (`Avance 3.pdf`, Sección 5)")
-    q1, q2 = st.columns(2)
-    with q1:
-        with st.expander("1. ¿Por qué las métricas elegidas son adecuadas para su problema?", expanded=True):
-            st.write(
-                "Porque la Congestión Severa (> 60 días hábiles) es un evento desbalanceado (15,6% en Test). "
-                "El Accuracy es engañoso (el clasificador Dummy alcanza 84,4% prediciendo siempre la clase mayoritaria con 0% de Recall). "
-                "Por ello priorizamos **Average Precision (AP)** para evaluar la calidad del ranking de probabilidades sobre la clase positiva, "
-                "y **Recall / F1-Score** en el umbral calibrado (0,35) que refleja la asimetría de costos del estudio jurídico."
-            )
-        with st.expander("2. ¿Qué evidencia muestra que el modelo no está sobreajustado ni con fuga de información?", expanded=True):
-            st.write(
-                "**Cero Fuga:** Solo ingresan 8 atributos conocidos en el instante exacto de programación ($T$), excluyendo `DIAS_TRAMITACION_PREVIA` y `DURACION_MINUTOS`, "
-                "y ajustando el `ColumnTransformer` dentro de `Pipeline` solo con datos de entrenamiento. "
-                "**Sin Sobreajuste:** En 5-Fold CV la desviación estándar entre folds es mínima ($s_{CV} = 0,0040$ en AP) y el ROC-AUC pasa de `0,8869` en Train (2021–2023) a `0,8600` en Test Out-of-Time (2024–2025)."
-            )
-    with q2:
-        with st.expander("3. ¿Dónde falla más el modelo y qué implica ese error en el contexto del problema?", expanded=True):
-            st.write(
-                "El error más relevante son los **Falsos Negativos** en audiencias iniciales o preparatorias de tribunales ágiles que sorpresivamente demoran > 75 días (como demostró el Caso Local 3 en Los Andes). "
-                "Jurídicamente, esto ocurre cuando el juez ordena diligencias externas previas no registradas en la tabla estadística (peritajes SML/DAM o notificaciones fallidas por receptor). "
-                "Para mitigar su impacto económico y cautelar en el estudio jurídico, calibramos el umbral a `0,35`, reduciendo los Falsos Negativos de 51,4% a 32,1%."
-            )
-        with st.expander("4. ¿Qué aporta la explicabilidad respecto de las variables y casos analizados?", expanded=True):
-            st.write(
-                "**Globalmente (Beeswarm):** Confirma que el ensamble aprende reglas alineadas con el derecho procesal de familia (`Audiencia de Juicio`, `Procedimiento Contencioso`, mes de diciembre y tribunales saturados suben el log-odds; `Inmediata` y `Protección` lo bajan). "
-                "**Localmente (Waterfall):** Permite al abogado explicar transparentemente a su cliente cuántos puntos de log-odds aporta cada característica de su causa desde el valor base $E[f(X)] = -1,209$."
             )
