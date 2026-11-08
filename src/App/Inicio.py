@@ -77,6 +77,7 @@ def pagina_inicio():
     - **`3.- Informe ETL`**: Informe ejecutivo interactivo enfocado en los **hallazgos forenses y decisiones estratégicas** adoptadas durante el saneamiento del dataset.
     - **`4.- Dashboard BI`**: Tablero ejecutivo de Business Intelligence orientado a estudios jurídicos (gestión de plazos, SLAs, capacidad de salas, litigiosidad y productividad telemática).
     - **`5.- EDA y Hallazgos`**: Análisis exploratorio interactivo de la **espera para una audiencia** (pregunta P1): distribución, comparación por tribunal, materia y época, evolución temporal y hallazgos para el estudio jurídico.
+    - **`6.- Modelado y Resultados`**: Modelos probabilísticos de la espera (Avance 3): resultados contra líneas base, simulador de una causa y comparador de tribunales con mapa.
     """)
 
 # -----------------------------------------------------------------------------
@@ -88,10 +89,13 @@ pagina_notebook_etl = st.Page("pages/2.- Notebook ETL.py", title="2.- Notebook E
 pagina_informe_etl = st.Page("pages/3.- Informe ETL.py", title="3.- Informe ETL", icon="📋")
 pagina_dashboard = st.Page("pages/4.- Dashboard BI.py", title="4.- Dashboard BI", icon="📈")
 pagina_eda = st.Page("pages/5.- EDA y Hallazgos.py", title="5.- EDA y Hallazgos", icon="🔍")
+pagina_modelado = st.Page("pages/6.- Modelado y Resultados.py", title="6.- Modelado y Resultados", icon="🤖",
+                          url_path="modelado")
 
 
 pg = st.navigation({
-    "Menú Principal": [pagina_home, pagina_ingesta, pagina_notebook_etl, pagina_informe_etl, pagina_dashboard, pagina_eda]
+    "Menú Principal": [pagina_home, pagina_ingesta, pagina_notebook_etl, pagina_informe_etl, pagina_dashboard,
+                       pagina_eda, pagina_modelado]
 })
 
 # -----------------------------------------------------------------------------

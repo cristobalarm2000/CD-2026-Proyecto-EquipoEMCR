@@ -33,7 +33,8 @@ src/App/
     ├── 2.- Notebook ETL.py       # Réplica técnica ejecutable del cuaderno de 7 fases (código y lints)
     ├── 3.- Informe ETL.py        # Informe interactivo ejecutivo de hallazgos forenses y decisiones procesales
     ├── 4.- Dashboard BI.py       # Tablero analítico ejecutivo interactivo con 5 vistas de negocio (Plotly)
-    └── 5.- EDA y Hallazgos.py    # Análisis exploratorio interactivo de la espera (P1) y hallazgos procesales
+    ├── 5.- EDA y Hallazgos.py    # Análisis exploratorio interactivo de la espera (P1) y hallazgos procesales
+    └── 6.- Modelado y Resultados.py # Modelos, simulador de causa y comparador de tribunales (Avance 3)
 ```
 
 ### Módulos Principales de la Aplicación:
@@ -48,7 +49,7 @@ src/App/
    * **Tablero 4: Transformación Digital y Virtualidad:** Evolución de la comparecencia remota por Zoom y ranking de adopción por tribunal.
    * **Tablero 5: Explorador de Microdatos:** Consulta filtrada y exportación en CSV.
 6. **`5.- EDA y Hallazgos`**: Análisis exploratorio interactivo sobre la **espera para una audiencia** (pregunta P1): distribución estadística, análisis de variables numéricas y categóricas, matriz de correlación libre de fugas de información, brecha de eficiencia entre tribunales (2,5x a 3x), sesgo de composición y paradoja de Simpson en audiencias remotas, evolución temporal (2015–2025) y hallazgos accionables para la gestión del estudio jurídico.
-7. *Proyección en Hoja de Ruta:* **`6.- Simulador de Plazos y Riesgos`**: Simulador interactivo que entregará probabilidades por tramo, rango típico P25–P75 y alertas de riesgo severo según los parámetros de la causa.
+7. **`6.- Modelado y Resultados`** (Avance 3): resultados de los modelos probabilísticos contra líneas base, simulador de una causa (probabilidad por tramo, alerta > 60 días, rango P25–P75 y recomendación) y comparador de tribunales con mapa.
 
 ---
 
@@ -82,32 +83,43 @@ El pipeline procesa **466.178 registros de audiencias** a lo largo de 7 fases ri
 
 ---
 
-## Hallazgos Analíticos y Modelado Predictivo (Baselines y Machine Learning)
+## Modelado y Resultados (Avance 3)
 
-A partir de los experimentos analíticos rigurosos (split temporal: entrenamiento 2015–2023 con 377.357 filas y evaluación en 2024–2025 con 88.821 filas) documentados en los reportes técnicos, se establecieron los siguientes hallazgos de modelado:
+Notebook: [`04_Modelado_audienciasparquet.ipynb`](notebooks/04_Modelado_audienciasparquet.ipynb) · Código: [`src/Modelado/`](src/Modelado/) · App: página **6.- Modelado y Resultados**.
 
-### 1. Comparación contra Líneas Base Heurísticas
-La variable objetivo se formuló en 3 clases operativas de negocio: **Rápido** ($\le 15$ días), **Estándar** ($16$ a $30$ días) y **Demora** ($> 30$ días):
+**Pregunta:** al agendar una audiencia, ¿qué probabilidad hay de que la espera sea **Rápida** (≤ 15 d), **Estándar** (16–30 d) o con **Demora** (> 30 d)? Además, una **alerta** binaria de espera severa (> 60 d).
 
-| Enfoque / Regla | Accuracy | F1 Macro | Log-Loss | ROC-AUC Severa (> 60 d) |
+### Diseño (fijado antes de ver resultados)
+- **Variables:** solo lo que el abogado sabe al agendar: tribunal, tipo de procedimiento y tipo de audiencia. Se excluyen `MACRO_MATERIA` (función exacta del procedimiento), `DIAS_TRAMITACION_PREVIA` y `DIAS_DESPACHO_AGENDAMIENTO` (fuga de información), y la fecha y duración de la audiencia.
+- **Validación con origen móvil:** se elige el modelo prediciendo 2023 con años anteriores y se reporta prediciendo 2024–2025 con años ≤ 2023 (prueba ciega). Nunca partición aleatoria, porque las audiencias de una causa no son independientes.
+- **Candidatos:** bayesiano jerárquico (Dirichlet–multinomial con agrupamiento parcial), regresión logística multinomial y HistGradientBoosting (3 semillas), en 2 ventanas (completa desde 2015 y reciente de 2 años), con y sin calibración isotónica.
+- **Métrica principal:** log-loss (calidad de las probabilidades), con IC 95 % por bootstrap de causas. **Regla de elección:** menor log-loss en validación; si la diferencia es < 0,002, gana el modelo más simple.
+
+### Resultados en la prueba ciega 2024–2025 (ventana reciente)
+
+| Enfoque | Accuracy | F1 macro | Log-loss ↓ | Alerta > 60 d: ROC-AUC / PR-AUC |
 | :--- | :---: | :---: | :---: | :---: |
-| **Regla Mayoritaria (Siempre Demora)** | 48,0% | 0,216 | - | - |
-| **Moda por Tribunal** | 50,8% | 0,401 | - | - |
-| **Moda por Tribunal $\times$ Tipo de Audiencia** | **55,6%** | **0,423** | - | - |
-| **HistGradientBoosting (Variables A: Tribunal, Proc., Tipo, Materia)** | **61,9%** | **0,533** | **0,864** | **0,80** (PR-AUC 0,465) |
+| Siempre la clase mayoritaria | 48,0 % | 0,216 | — | — |
+| Moda por tribunal × procedimiento × tipo | 61,8 % | 0,493 | — | — |
+| Distribución global (sin variables) | 48,0 % | 0,216 | 1,084 | 0,50 / 0,18 |
+| **Bayesiano jerárquico (elegido)** | **61,8 %** | **0,491** | **0,868** [0,862–0,874] | **0,85 / 0,52** |
+| Regresión logística | 60,0 % | 0,437 | 0,908 | 0,82 / 0,48 |
+| HistGradientBoosting | 61,9 % | 0,494 | 0,868 [0,862–0,874] | 0,85 / 0,52 |
 
-*Hallazgo clave:* El modelo de Machine Learning aporta una mejora neta y honesta de **+6,3 puntos porcentuales de accuracy** y **+0,11 de F1 macro** sobre la mejor regla heurística, concentrando prácticamente todo su poder predictivo en solo 4 variables conocidas al agendar (sin incurrir en fuga de información).
+### Hallazgos
+1. **Las probabilidades sirven:** el log-loss baja de 1,084 (sin variables) a 0,868, y la alerta de espera severa logra PR-AUC 0,52 frente a 0,18 de una alerta al azar.
+2. **Un modelo simple basta:** Gradient Boosting y el bayesiano jerárquico empatan (diferencia −0,0001, IC 95 % −0,0005 a +0,0004). Se elige el bayesiano por parsimonia y porque se explica celda por celda.
+3. **Los datos recientes pesan más que el algoritmo:** en validación, la ventana reciente obtiene log-loss 0,748 contra 0,977 de la completa. Calibrar (reservar el último año) solo ayuda a la ventana completa.
+4. **Más variables no ayudan:** modalidad, mes y día de programación o la congestión del tribunal empeoran la prueba (0,868 → 0,932 y 1,020).
+5. **Hay tribunales muy volátiles:** en preparatorias contenciosas, Villa Alemana pasó de 9 % de audiencias con demora en 2023 a 88 % en 2025. Por eso el modelo final se reentrena con 2024–2025.
+6. **La brecha entre tribunales es el hallazgo más accionable:** para una preparatoria contenciosa, la mediana de espera va de 26 a 83 días según el tribunal.
 
-### 2. Detección de Esperas Severas (> 60 días)
-Para casos de congestión crítica (> 60 días de espera), el clasificador alcanza un **ROC-AUC $\approx$ 0,80** y **PR-AUC $\approx$ 0,42–0,47** (frente a 0,18 de prevalencia aleatoria en test), multiplicando por **2,5× la capacidad de alerta temprana** para que los estudios gestionen holguras procesales.
+### Entregables en la app (página 6)
+- **Resultados:** tabla contra líneas base, IC 95 %, curva de calibración, matriz de confusión, curva precisión–recall y ablación.
+- **Simulador "mi causa":** probabilidad por tramo, alerta de espera severa, rango típico P25–P75 y recomendación para el estudio.
+- **Comparador de tribunales:** mapa de la región coloreado por espera (más intenso = más espera), ranking con IC 95 % y aviso de uso responsable (solo entre tribunales legalmente competentes).
 
-### 3. El Sistema Cambió de Régimen: Necesidad Crítica de Calibración
-La proporción de audiencias con demora extrema cambió radicalmente a lo largo del decenio:
-- **Espera > 60 días:** Pasó de 1,5% (2015) a un pico de **29,2% (2022)**, estabilizándose en 20,3% (2024) y 15,9% (2025).
-- **Consecuencia de Calibración:** Un modelo entrenado con datos históricos desactualizados subestima la probabilidad de demora en períodos recientes. Resulta imperativo aplicar calibración continua (`CalibratedClassifierCV`) con ventanas temporales recientes (24–36 meses) para no entregar estimaciones optimistas erróneas al litigante.
-
-### 4. Robustez del Estimador de Rango Empírico
-Un estimador por rango intercuartil P25–P75 segmentado por tribunal y tipo de audiencia, calculado sobre el régimen reciente (2021–2023), **cubre el 52,2% de las audiencias reales observadas en 2024–2025**. Esto valida que el producto central puede combinar un rango empírico transparente con alertas probabilísticas de riesgo.
+**Limitaciones:** solo audiencias realizadas; no se observan juez, defensa ni contenido de la causa; una jurisdicción y una materia; comparar tribunales muestra asociación, no causa.
 
 ---
 
@@ -164,7 +176,8 @@ CD-2026-Proyecto-EquipoEMCR/
 ├── notebooks/
 │   ├── 01 ETL_audienciasparquet.ipynb         # Cuaderno interactivo de 7 fases ejecutado con NotebookClient
 │   ├── 02 EDA_audienciasparquet.ipynb         # Cuaderno de análisis exploratorio inicial
-│   └── 03_EDA_audienciasparquet_temp.ipynb    # Cuaderno de EDA integral sobre dataset preparado con hallazgos
+│   ├── 03_EDA_audienciasparquet_temp.ipynb    # Cuaderno de EDA integral sobre dataset preparado con hallazgos
+│   └── 04_Modelado_audienciasparquet.ipynb    # Modelado probabilístico de la espera (Avance 3)
 ├── reports/
 │   ├── 01_Ingesta_acotada.md                  # Informe técnico de la extracción REST vía API PJUD
 │   ├── 02_Auditoria_Calidad_Datos.md          # Auditoría forense exhaustiva y fundamentos jurídicos (Secciones 1 a 10)
@@ -172,14 +185,17 @@ CD-2026-Proyecto-EquipoEMCR/
 │   └── 04_plan_avance_proyecto_feedback_profe.md # Plan de decisión y avance: caso universitario vs. caso producto
 ├── src/
 │   ├── Api_Caller/                    # Conector modular hacia la API estadística del Poder Judicial
-│   └── App/                           # Plataforma interactiva Streamlit
+│   ├── App/                           # Plataforma interactiva Streamlit
 │       ├── Inicio.py                  # Portada y router de navegación multi-página
 │       └── pages/
 │           ├── 1.- Ingesta de Datos.py
 │           ├── 2.- Notebook ETL.py
 │           ├── 3.- Informe ETL.py
 │           ├── 4.- Dashboard BI.py
-│           └── 5.- EDA y Hallazgos.py
+│           ├── 5.- EDA y Hallazgos.py
+│           └── 6.- Modelado y Resultados.py
+│   └── Modelado/                      # Pipeline de modelado: modelo_espera.py (bloques) y entrenar.py (regenera artefactos)
+├── models/                            # Artefactos del modelo que lee la página 6 (JSON, parquet y joblib)
 ├── visualizacion BI/
 │   └── infografia_audiencias_familia.html     # Infografía ejecutiva con casos de uso de negocio
 ├── requirements.txt                   # Dependencias del proyecto (incluye duckdb y scikit-learn)
